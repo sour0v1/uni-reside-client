@@ -1,11 +1,16 @@
 
 import Navbar from './navbar/Navbar';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 const Root = () => {
+    const location = useLocation();
+    console.log(location.pathname);
     return (
         <div>
-            <Navbar></Navbar>
+            {
+                location.pathname !== '/sign-up' || location.pathname !== '/login' &&
+                <Navbar></Navbar> 
+            }
             <Outlet></Outlet>
         </div>
     );
