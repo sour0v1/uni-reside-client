@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaGithub, FaRegEyeSlash } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { IoEyeOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../provider/AuthProvider';
 
 const SignUp = () => {
+    const {user} = useContext(AuthContext)
+    console.log(user)
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [closed, setClosed] = useState(false);
 
