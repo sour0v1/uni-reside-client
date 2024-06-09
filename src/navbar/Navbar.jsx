@@ -8,10 +8,12 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from '../provider/AuthProvider';
 import { signOut } from 'firebase/auth';
 import auth from '../firebase/firebase.config';
+import { RxCross1 } from 'react-icons/rx';
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
     const [open1, setOpen1] = useState(false);
+    console.log(open1)
     const { user } = useContext(AuthContext);
     // const user = false;
     // fixed z-10 w-full
@@ -26,9 +28,9 @@ const Navbar = () => {
     }
     return (
         <>
-            <div className={`font-roboto flex justify-between items-center lg:px-16 py-5 bg-[#373A40] bg-opacity-35 fixed z-10 w-full text-white ${!open && 'px-6'}`}>
+            <div className={`font-roboto flex justify-between items-center lg:px-16 py-5 bg-[#373A40] bg-opacity-35 fixed z-10 w-full text-white ${!open ? 'px-6' : 'pr-6'}`}>
                 <h1 className="text-2xl">UniReside</h1>
-                <ul className={`flex justify-center items-center gap-6 flex-col lg:flex-row absolute lg:static  bg-[#151515] lg:bg-opacity-0 h-fit lg:h-auto w-full lg:w-auto py-6 lg:py-0 lg:px-0 ${open ? 'top-0' : 'bottom-[800px]'}`}>
+                <ul className={`flex justify-start items-center gap-6 flex-col lg:flex-row absolute lg:static  bg-[#373A40] lg:bg-opacity-0 h-screen lg:h-auto w-1/3 lg:w-auto py-6 lg:py-0 lg:px-0 ${open ? 'top-0' : 'left-[800px]'}`}>
                     <NavLink to={'/'}>Home</NavLink>
                     <NavLink to={'/meals'}>Meals</NavLink>
                     <NavLink to={'/upcoming-meals'}>Upcoming Meals</NavLink>
@@ -44,16 +46,22 @@ const Navbar = () => {
                                 <NavLink to={'/login'}>Sign In</NavLink>
                             </>
                     }
-                    <button className="lg:hidden absolute lg:relative top-6 right-4 text-2xl" onClick={() => { setOpen(!open); setOpen1(false) }}><IoMdClose /></button>
+
                 </ul>
-                <button className="lg:hidden text-2xl" onClick={() => setOpen(!open)}><HiOutlineMenu /></button>
+                {
+                    open ?
+                        <button className="lg:hidden text-2xl" onClick={() => { setOpen(!open); setOpen1(false) }}><IoMdClose /></button> :
+                        <button className="lg:hidden text-2xl" onClick={() => { setOpen(!open); setOpen1(false) }}><HiOutlineMenu /></button>
+                }
+
+                <div className={`font-roboto border text-black bg-white shadow-sm flex flex-col justify-start w-1/3 lg:w-fit h-screen lg:h-auto gap-3 items-center px-6 py-6 absolute ${!open1 ? '-left-[800px]' : ' z-20  top-0 left-0 lg:left-auto lg:top-16 lg:right-16'} `}>
+                    <p className='font-medium'>{user?.displayName || 'Unknown'}</p>
+                    <NavLink to={'/dashboard'} className={'dash'}>Dashboard</NavLink>
+                    <button className='btn1' onClick={handleLogOut}>Log Out</button>
+                    <button className='text-2xl bg-gray-400 px-2 py-2 rounded-full bg-opacity-20' onClick={() => setOpen1(!open1)}><RxCross1 /></button>
+                </div>
             </div>
-            <div className={`font-roboto border bg-white rounded shadow-sm flex flex-col justify-center items-center px-6 py-3 absolute ${!open1 ? 'hidden' : ' text-center w-full mx-auto lg:px-9 lg:w-auto  lg:right-16 lg:top-18 gap-3'} `}>
-                <p>{user?.displayName || 'Unknown'}</p>
-                <NavLink to={'/dashboard'} className={'dash'}>Dashboard</NavLink>
-                <button className='btn1' onClick={handleLogOut}>Log Out</button>
-                {/* <button className='text-2xl' onClick={() => setOpen1(!open1)}><RxCross1 /></button> */}
-            </div>
+
         </>
     );
 };
