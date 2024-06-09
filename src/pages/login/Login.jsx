@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { FaGithub, FaRegEyeSlash } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../../provider/AuthProvider';
 import { useForm } from 'react-hook-form';
 
 const Login = () => {
-    const { signInUserByEmail, setLoading, loading } = useContext(AuthContext);
+    const { signInUserByEmail, createUserByGithub, setLoading, loading, createUserByGoogle } = useContext(AuthContext);
     const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
 
     const onSubmit = async (data) => {
@@ -25,6 +25,25 @@ const Login = () => {
             })
         reset
     };
+    // sign in with google
+    const handleGoogleSingIn = () => {
+        createUserByGoogle()
+            .then(result => {
+                console.log(result.user);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+    const handleGithubSingIn = () => {
+        createUserByGithub()
+            .then(result => {
+                console.log(result.user);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
     if (loading) {
         return <p className=" text-xl w-full flex h-screen justify-center items-center">loading...</p>
     }
@@ -33,12 +52,12 @@ const Login = () => {
             <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
                 <div className='flex flex-col gap-2'>
                     <label htmlFor="email">Email</label>
-                    <input {...register('email', {required : true})} className='px-3 py-2 bg-gray-100' id='email' type="email" placeholder='Email' />
+                    <input {...register('email', { required: true })} className='px-3 py-2 bg-gray-100' id='email' type="email" placeholder='Email' />
                     {errors.email && <span className='text-red-500'>This field is required</span>}
                 </div>
                 <div className='flex flex-col gap-2 relative'>
                     <label htmlFor="password">Password</label>
-                    <input {...register('password', {required : true})} className='px-3 py-2 bg-gray-100' id='password' type="password" placeholder='Password' />
+                    <input {...register('password', { required: true })} className='px-3 py-2 bg-gray-100' id='password' type="password" placeholder='Password' />
                     <span className='absolute right-2 top-11'><FaRegEyeSlash /></span>
                     {errors.password && <span className='text-red-500'>This field is required</span>}
                 </div>
@@ -46,11 +65,11 @@ const Login = () => {
             </form>
             <div className='w-full text-center space-y-4 mt-4'>
                 <p className=''>Or</p>
-                <button className='flex justify-center items-center py-2 bg-gray-100 rounded w-full gap-4 hover:bg-gray-200'>
+                <button onClick={handleGoogleSingIn} className='flex justify-center items-center py-2 bg-gray-100 rounded w-full gap-4 hover:bg-gray-200'>
                     <span className='text-2xl'><FcGoogle /></span>
                     <span className=''>Google</span>
                 </button>
-                <button className='flex justify-center items-center py-2 bg-gray-100 rounded w-full gap-4 hover:bg-gray-200'>
+                <button onClick={handleGithubSingIn} className='flex justify-center items-center py-2 bg-gray-100 rounded w-full gap-4 hover:bg-gray-200'>
                     <span className='text-2xl'><FaGithub /></span>
                     <span className=''>GitHub</span>
                 </button>

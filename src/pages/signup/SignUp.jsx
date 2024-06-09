@@ -13,7 +13,7 @@ const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 
 const SignUp = () => {
-    const { user, createUserByEmail, loading, setLoading } = useContext(AuthContext)
+    const { user, createUserByEmail, loading, setLoading, createUserByGoogle, createUserByGithub } = useContext(AuthContext)
     // console.log(user)
     const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
     const [closed, setClosed] = useState(false);
@@ -53,6 +53,26 @@ const SignUp = () => {
         reset
     };
     // console.log(watch('name'));
+    // sign in with google
+    const handleGoogleSingIn = () =>{
+        createUserByGoogle()
+            .then(result => {
+                console.log(result.user);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+    // sign in with google
+    const handleGithubSingIn = () =>{
+        createUserByGithub()
+            .then(result => {
+                console.log(result.user);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
 
     if (loading) {
         return <p className=" text-xl w-full flex h-screen justify-center items-center">loading...</p>
@@ -89,11 +109,11 @@ const SignUp = () => {
             </form>
             <div className='w-full text-center space-y-4 mt-4'>
                 <p className=''>Or</p>
-                <button className='flex justify-center items-center py-2 bg-gray-100 rounded w-full gap-4 hover:bg-gray-200'>
+                <button onClick={handleGoogleSingIn} className='flex justify-center items-center py-2 bg-gray-100 rounded w-full gap-4 hover:bg-gray-200'>
                     <span className='text-2xl'><FcGoogle /></span>
                     <span className=''>Google</span>
                 </button>
-                <button className='flex justify-center items-center py-2 bg-gray-100 rounded w-full gap-4 hover:bg-gray-200'>
+                <button onClick={handleGithubSingIn} className='flex justify-center items-center py-2 bg-gray-100 rounded w-full gap-4 hover:bg-gray-200'>
                     <span className='text-2xl'><FaGithub /></span>
                     <span className=''>GitHub</span>
                 </button>
