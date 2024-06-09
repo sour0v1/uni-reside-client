@@ -57,6 +57,7 @@ const AddMeal = () => {
                 </div>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="">Category</label>
+                    {/* TODO : change to select input */}
                     <input {...register('category')} className="py-1 px-3 bg-gray-200 outline-none" type="text" />
                 </div>
                 <div className="flex flex-col gap-2">
