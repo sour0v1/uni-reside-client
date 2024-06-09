@@ -3,6 +3,8 @@ import Root from "../Root";
 import Home from "../pages/home/Home";
 import SignUp from "../pages/signup/SignUp";
 import Login from "../pages/login/Login";
+import Dashboard from "../dashboard/admin/Dashboard";
+import AddMeal from "../dashboard/admin/AddMeal";
 
 const router = createBrowserRouter([
     {
@@ -21,8 +23,18 @@ const router = createBrowserRouter([
                 path : '/login',
                 element : <Login></Login>
             }
+        ],  
+    },
+    {
+        path : '/dashboard',
+        element : <Dashboard></Dashboard>,
+        children : [
+            // admin routes
+            {
+                path : 'add-meal',
+                element : <AddMeal></AddMeal>
+            }
         ]
-        
     }
 ])
 

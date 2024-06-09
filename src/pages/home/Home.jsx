@@ -1,11 +1,14 @@
 // import Banner from "./home_components/Banner";
 
+import Membership from "./membership/Membership";
+
 
 
 const Home = () => {
     return (
         <div>
             {/* <Banner></Banner> */}
+            <Membership></Membership>
         </div>
     );
 };
