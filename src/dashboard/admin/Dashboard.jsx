@@ -9,9 +9,9 @@ import { Link, NavLink, Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
     return (
-        <div className='grid grid-cols-12 gap-6 max-w-6xl mx-auto font-roboto my-9 bg-gray-100 p-9'>
+        <div className='grid grid-cols-1 lg:grid-cols-12 gap-6 lg:max-w-6xl lg:mx-auto font-roboto my-9 bg-gray-100 p-9'>
             {/* routes */}
-            <div id='routes' className='flex flex-col py-6 col-span-3 px-6 gap-6 bg-slate-50 shadow'>
+            <div id='routes' className='flex flex-col py-6 lg:col-span-3 px-6 gap-6 bg-slate-50 shadow'>
                 <NavLink to={'admin-profile'} className={'flex justify-start items-center gap-2'}>
                     <span><RiAdminLine /></span>
                     <span>Admin Profile</span>
@@ -47,7 +47,7 @@ const Dashboard = () => {
                 </NavLink>
             </div>
             {/* display */}
-            <div className='col-span-9 py-6 bg-slate-50 shadow'>
+            <div className='lg:col-span-9 py-6 bg-slate-50 shadow'>
                 <Outlet></Outlet>
             </div>
         </div>

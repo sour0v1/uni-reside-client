@@ -3,9 +3,9 @@ import { MdOutlineCheck } from 'react-icons/md';
 
 const Membership = () => {
     return (
-        <div className='font-roboto max-w-4xl mx-auto my-16'>
+        <div className='font-roboto max-w-4xl mx-auto my-16 px-9 lg:px-0'>
             <h2 className='text-center text-2xl font-bold mb-9'>Membership</h2>
-            <div className='grid grid-cols-3 gap-9'>
+            <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-9'>
                 {/* card 1 */}
                 <div className='flex flex-col shadow p-6 rounded space-y-4 bg-gray-100'>
                     <h4 className='font-bold'>Silver</h4>

@@ -22,6 +22,7 @@ const Login = () => {
                 // console.log(result.user);
                 console.log('sign in successfully');
                 setLoading(false);
+                setSignInError(null);
                 reset();
             })
             .catch(error => {
