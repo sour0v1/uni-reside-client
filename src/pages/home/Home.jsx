@@ -1,5 +1,6 @@
 // import Banner from "./home_components/Banner";
 
+import Banner from "./banner/Banner";
 import Membership from "./membership/Membership";
 
 
@@ -7,7 +8,7 @@ import Membership from "./membership/Membership";
 const Home = () => {
     return (
         <div>
-            {/* <Banner></Banner> */}
+            <Banner></Banner>
             <Membership></Membership>
         </div>
     );
