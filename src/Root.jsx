@@ -1,4 +1,5 @@
 
+import Footer from './footer/Footer';
 import Navbar from './navbar/Navbar';
 import { Outlet, useLocation } from 'react-router-dom';
 
@@ -14,6 +15,9 @@ const Root = () => {
                (noHeaderFooter || noHeaderFooter1) || <Navbar></Navbar> 
             }
             <Outlet></Outlet>
+            {
+               (noHeaderFooter || noHeaderFooter1) || <Footer></Footer> 
+            }
         </div>
     );
 };

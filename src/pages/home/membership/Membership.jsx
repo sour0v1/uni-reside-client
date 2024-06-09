@@ -1,10 +1,10 @@
-import React from 'react';
+
 import { MdOutlineCheck } from 'react-icons/md';
 
 const Membership = () => {
     return (
-        <div className='font-roboto max-w-4xl mx-auto'>
-            <h2 className='text-center text-2xl font-bold mb-16'>Subscription Plan</h2>
+        <div className='font-roboto max-w-4xl mx-auto my-16'>
+            <h2 className='text-center text-2xl font-bold mb-9'>Membership</h2>
             <div className='grid grid-cols-3 gap-9'>
                 {/* card 1 */}
                 <div className='flex flex-col shadow p-6 rounded space-y-4 bg-gray-100'>
