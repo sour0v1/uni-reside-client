@@ -58,7 +58,7 @@ const Navbar = () => {
                     <p className='font-medium'>{user?.displayName || 'Unknown'}</p>
                     <NavLink to={'/dashboard'} className={'dash'}>Dashboard</NavLink>
                     <button className='btn1' onClick={handleLogOut}>Log Out</button>
-                    <button className='text-2xl bg-gray-400 px-2 py-2 rounded-full bg-opacity-20' onClick={() => setOpen1(!open1)}><RxCross1 /></button>
+                    <button className='text-2xl bg-gray-100 hover:bg-gray-200 px-2 py-2 rounded-full' onClick={() => setOpen1(!open1)}><RxCross1 /></button>
                 </div>
             </div>
 

@@ -6,6 +6,7 @@ const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 const AddMeal = () => {
     const axiosSecure = useAxiosSecure();
+    // const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = async (data) => {
         console.log(data);
@@ -34,8 +35,8 @@ const AddMeal = () => {
             title, ingredients, category, price, description, rating, postTime, reviews, adminName, adminEmail, image
         }
 
-       const res = await axiosSecure.post('/add-meals', meals);
-       console.log(res.data);
+        const res = await axiosSecure.post('/add-meals', meals);
+        console.log(res.data);
 
     }
 
@@ -57,12 +58,17 @@ const AddMeal = () => {
                 </div>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="">Category</label>
-                    {/* TODO : change to select input */}
-                    <input {...register('category')} className="py-1 px-3 bg-gray-200 outline-none" type="text" />
+                    {/* <input {...register('category')} className="py-1 px-3 bg-gray-200 outline-none" type="text" /> */}
+                    <select className="py-1 px-3 bg-gray-200 outline-none" {...register("category")}>
+                        <option value="null">Select</option>
+                        <option value="breakfast">breakfast</option>
+                        <option value="lunch">lunch</option>
+                        <option value="dinner">dinner</option>
+                    </select>
                 </div>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="">Price</label>
-                    <input {...register('price')} className="py-1 px-3 bg-gray-200 outline-none" type="number" />
+                    <input {...register('price')} className="py-1 px-3 bg-gray-200 outline-none" type="text" />
                 </div>
                 <div className="flex flex-col gap-2 col-span-2">
                     <label htmlFor="">Description</label>
