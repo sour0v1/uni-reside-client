@@ -9,35 +9,35 @@ import Meals from "../pages/meals/Meals";
 
 const router = createBrowserRouter([
     {
-        path : '/',
-        element : <Root></Root>,
-        children : [
+        path: '/',
+        element: <Root></Root>,
+        children: [
             {
-                path : '/',
-                element : <Home></Home>
+                path: '/',
+                element: <Home></Home>
             },
             {
-                path : '/sign-up',
-                element : <SignUp></SignUp>
+                path: '/sign-up',
+                element: <SignUp></SignUp>
             },
             {
-                path : '/login',
-                element : <Login></Login>
+                path: '/login',
+                element: <Login></Login>
             },
             {
-                path : '/meals',
-                element : <Meals></Meals>
+                path: '/meals',
+                element: <Meals></Meals>
             }
-        ],  
+        ],
     },
     {
-        path : '/dashboard',
-        element : <Dashboard></Dashboard>,
-        children : [
+        path: '/dashboard',
+        element: <Dashboard></Dashboard>,
+        children: [
             // admin routes
             {
-                path : 'add-meal',
-                element : <AddMeal></AddMeal>
+                path: 'add-meal',
+                element: <AddMeal></AddMeal>
             }
         ]
     }

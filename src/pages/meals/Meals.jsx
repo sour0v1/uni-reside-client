@@ -2,39 +2,36 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { IoFilterOutline, IoSearch, IoSearchOutline } from "react-icons/io5";
 import MealCard from "../../components/MealCard";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import InfiniteScroll from 'react-infinite-scroller';
 
 
 const Meals = () => {
     const axiosPublic = useAxiosPublic();
-    const [searchedMeal, setSearchedMeal] = useState([]);
-    const [searchedMeal1, setSearchedMeal1] = useState([]);
+    const [meals, setMeals] = useState([]);
+    const [meals1, setMeals1] = useState([]);
+    const [page, setPage] = useState(1)
     const [searchValue, setSearchValue] = useState(null);
     const [filter, setFilter] = useState(false);
-    const [categoryFilter, setCategoryFilter] = useState([]);
-    console.log('svalue - ', searchedMeal1)
-    const { data: meals = [] } = useQuery({
-        queryKey: ['meal'],
-        queryFn: async () => {
-            const res = await axiosPublic.get('/all-category-meals')
-            return res.data;
-        },
-    })
-    useEffect(() => {
-        if(meals){
-            setSearchedMeal(meals);
-        }
-    }, [meals])
+    console.log('svalue - ', meals)
 
-    // setSearchedMeal(...meals);
+    useEffect(() => {
+        const allMeals = async(pageNo) => {
+            const res = await axiosPublic.get(`/all-category-meals?page=${pageNo}&limit=3`)
+            console.log(res.data);
+            setMeals(res.data);
+        }
+        allMeals(page);
+    }, [axiosPublic, page])
+   
     const handleSearch = async (event) => {
         const searchQuery = event.target.value;
         setSearchValue(searchQuery);
         console.log(searchQuery);
         const res = await axiosPublic.get(`/search-meals/${searchQuery}`)
         console.log(res.data);
-        setSearchedMeal(res.data);
-        setSearchedMeal1(res.data);
+        setMeals(res.data);
+        setMeals1(res.data);
 
     }
     // console.log(meals);
@@ -44,12 +41,12 @@ const Meals = () => {
         if (!searchValue) {
             const res = await axiosPublic.get(`/filter-by-category/${filterValue}`)
             console.log(res.data);
-            setSearchedMeal(res.data);
+            setMeals(res.data);
         }
-        if(searchValue){
-           const filterSearchValue = searchedMeal1.filter(value => filterValue === value.category);
-           console.log('ddd', filterSearchValue)
-           setSearchedMeal(filterSearchValue);
+        if (searchValue) {
+            const filterSearchValue = meals1.filter(value => filterValue === value.category);
+            console.log('ddd', filterSearchValue)
+            setMeals(filterSearchValue);
         }
 
     }
@@ -68,9 +65,9 @@ const Meals = () => {
             </div>
             {
                 filter &&
-                <div className="flex justify-end items-center gap-9">
+                <div className="flex justify-center items-center gap-9">
                     <div className="mb-6 flex justify-end">
-                        <select onChange={handleCategoryFilter} className="bg-gray-200 py-3 px-2 border-2 border-opacity-80 border-black" name="" id="">
+                        <select onChange={handleCategoryFilter} className="bg-gray-200 py-3 px-2 border-2 border-opacity-80 " name="" id="">
                             <option value="category">Category</option>
                             <option value="breakfast">Breakfast</option>
                             <option value="lunch">Lunch</option>
@@ -78,7 +75,7 @@ const Meals = () => {
                         </select>
                     </div>
                     <div className="mb-6 flex justify-end">
-                        <select className="bg-gray-200 py-3 px-2 border-2 border-opacity-80 border-black" name="" id="">
+                        <select className="bg-gray-200 py-3 px-2 border-2 border-opacity-80" name="" id="">
                             <option value="filter">Price($)</option>
                             <option value="category">0 - 20</option>
                             <option value="">20 - 40</option>
@@ -87,12 +84,21 @@ const Meals = () => {
                     </div>
                 </div>
             }
+            {/* <InfiniteScroll
+                pageStart={0}
+                loadMore={fetchData}
+                hasMore={hasMore}
+                loader={<div className="loader" key={0}>Loading ...</div>}
+            >
+                
+            </InfiniteScroll> */}
             <div className="max-w-5xl mx-auto grid grid-cols-3 gap-6">
                 {
-                    !searchedMeal?.length > 0 ? <p className="text text-4xl">Not found</p> :
-                        searchedMeal.map(meal => <MealCard meal={meal} key={meal._id}></MealCard>)
+                    !meals?.length > 0 ? <p className="text text-4xl">Not found</p> :
+                        meals.map(meal => <MealCard meal={meal} key={meal._id}></MealCard>)
                 }
             </div>
+
         </div>
     )
 };

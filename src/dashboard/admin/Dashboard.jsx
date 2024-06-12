@@ -6,6 +6,7 @@ import { MdOutlineRateReview } from 'react-icons/md';
 import { PiChefHat } from 'react-icons/pi';
 import { RiAdminLine } from 'react-icons/ri';
 import { Link, NavLink, Outlet } from 'react-router-dom';
+import ScrollToTop from '../../components/ScrollToTop';
 
 const Dashboard = () => {
     return (
@@ -48,6 +49,7 @@ const Dashboard = () => {
             </div>
             {/* display */}
             <div className='lg:col-span-9 py-6 bg-slate-50 shadow'>
+                <ScrollToTop></ScrollToTop>
                 <Outlet></Outlet>
             </div>
         </div>

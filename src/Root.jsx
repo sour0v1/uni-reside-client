@@ -1,4 +1,5 @@
 
+import ScrollToTop from './components/ScrollToTop';
 import Footer from './footer/Footer';
 import Navbar from './navbar/Navbar';
 import { Outlet, useLocation } from 'react-router-dom';
@@ -12,11 +13,14 @@ const Root = () => {
     return (
         <div>
             {
-               (noHeaderFooter || noHeaderFooter1) || <Navbar></Navbar> 
+                (noHeaderFooter || noHeaderFooter1) || <Navbar></Navbar>
             }
-            <Outlet></Outlet>
+            <div>
+                <ScrollToTop></ScrollToTop>
+                <Outlet></Outlet>
+            </div>
             {
-               (noHeaderFooter || noHeaderFooter1) || <Footer></Footer> 
+                (noHeaderFooter || noHeaderFooter1) || <Footer></Footer>
             }
         </div>
     );
