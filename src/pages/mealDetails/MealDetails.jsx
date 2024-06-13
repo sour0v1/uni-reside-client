@@ -22,6 +22,16 @@ const MealDetails = () => {
         },
         enabled: !!id
     })
+    // Review Count
+    const { data: review, isPending : isLoading, refetch: reload } = useQuery({
+        queryKey: ['review'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/review-count?id=${id}`);
+            return res.data;
+        },
+        enabled: !!id
+    })
+    console.log(review);
     // handle like
     const handleLike = async (id) => {
         console.log(id);
@@ -33,12 +43,31 @@ const MealDetails = () => {
     const handleRequest = async (id, title, likes, reviews) => {
         console.log(id);
         const info = {
-            title, likes, reviews, userName : user?.displayName, userEmail : user?.email, status : 'pending'
+            title, likes, reviews, userName: user?.displayName, userEmail: user?.email, status: 'pending'
         }
         const res = await axiosSecure.post(`/request?mealId=${id}&userEmail=${user?.email}`, info);
         toast(res.data.message);
     }
-    if (isPending) {
+    // post review
+    const post = document.getElementById('review');
+    const handleReview = async () => {
+        console.log(post.value);
+        const reviewInfo = {
+            mealId: meal?._id,
+            title: meal?.title,
+            likes: meal?.likes || 0,
+            review: post.value,
+            userEmail: user?.email
+
+        }
+        const res = await axiosSecure.post('/review', reviewInfo);
+        console.log(res.data);
+        if (res.data.insertedId) {
+            reload();
+            toast('Posted Successfully!');
+        }
+    }
+    if (isPending && isLoading) {
         return <p>Loading...</p>
     }
     return (
@@ -53,6 +82,14 @@ const MealDetails = () => {
                 </div>
             </div>
             <p>{meal?.description}</p>
+            <p><span className='font-medium'>Ingredients : </span>{meal?.ingredients}</p>
+            <p><span className='font-medium'>Rating : </span>{meal?.rating}</p>
+            <p><span className='font-medium'>Distributor : </span>{meal?.adminName}</p>
+            <p><span className='font-medium'>Review : </span>{review?.length || 0}</p>
+            <textarea className='w-full bg-gray-100 px-3 py-2' placeholder='Post a review' id="review" cols={3} rows={3}></textarea>
+            <div className='w-full flex justify-end'>
+                <button onClick={handleReview} className='py-2 px-4 bg-[#373A40] text-white hover:bg-[#0C0C0C] '>Post</button>
+            </div>
             <ToastContainer></ToastContainer>
         </div>
     );

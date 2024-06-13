@@ -6,7 +6,7 @@ import Login from "../pages/login/Login";
 import Dashboard from "../dashboard/admin/Dashboard";
 import AddMeal from "../dashboard/admin/AddMeal";
 import Meals from "../pages/meals/Meals";
-import MealDetails from "../pages/mealDetails.jsx/MealDetails";
+import MealDetails from "../pages/mealDetails/MealDetails";
 
 const router = createBrowserRouter([
     {
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
             {
                 path : '/meal/:id',
                 element : <MealDetails></MealDetails>
-            }
+            },
         ],
     },
     // dashboard
