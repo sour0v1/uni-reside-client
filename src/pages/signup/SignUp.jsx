@@ -21,7 +21,7 @@ const SignUp = () => {
     const axiosPublic = useAxiosPublic();
     const saveUser = async (name, email, image) => {
         const userInfo = {
-            name, email, image, badge: 'bronze'
+            name, email, userPhoto : image, badge: 'bronze'
         }
         const res = await axiosPublic.post('/create-user', userInfo);
         console.log(res.data);

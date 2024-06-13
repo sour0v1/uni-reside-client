@@ -20,15 +20,32 @@ const MealDetails = () => {
         },
         enabled: !!id
     })
+    // check request
+    const { data: checkRequest, isPending : isLoading, refetch : recall } = useQuery({
+        queryKey: ['request'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/check-request?id=${id}`);
+            return res.data;
+        },
+        enabled: !!id
+    })
+    console.log('hmmm -', checkRequest);
     // request meal
-    const handleRequest = async(id) => {
+    const handleRequest = async (id, title, likes, reviews) => {
         const res = await axiosSecure.get(`/user?userEmail=${user?.email}`)
         // console.log(res.data);
         const userInfo = res.data;
-        if(res.data.badge === 'silver' || res.data.badge === 'gold' || res.data.badge === 'bronze'){
-           console.log('true');
-           const res = await axiosSecure.post(`/request-meal?id=${id}`, userInfo)
-           console.log(res.data);
+        const { name: userName, email } = userInfo
+        const info = {
+            mealId: id, userName, email, title, likes, reviews, isRequested: true, status: 'pending',
+        }
+        console.log(info);
+        if (res.data.badge === 'silver' || res.data.badge === 'gold' || res.data.badge === 'bronze') {
+            console.log('true');
+            const res = await axiosSecure.post(`/request-meal`, info)
+            console.log(res.data);
+            recall();
+            return;
         }
         console.log('false')
     }
@@ -46,7 +63,7 @@ const MealDetails = () => {
                 return;
             }
         }
-        if(likeRes.data.isLiked){
+        if (likeRes.data.isLiked) {
             // localStorage.setItem('isLiked', likeRes.data.isLiked);
             console.log('already liked');
         }
@@ -64,8 +81,8 @@ const MealDetails = () => {
             <div className='flex justify-between items-center'>
                 <h1 className='text-2xl font-bold'>{meal?.title}</h1>
                 <div className='flex justify-center items-center gap-3'>
-                    <button onClick={() => handleLike(meal?._id)} className='btn px-6 text-xl'>{meal.isLiked ? <AiFillLike />: <AiOutlineLike />}<span>{meal?.likes}</span></button>
-                    <button onClick={() => handleRequest(meal?._id)} className='btn px-6 text-xl'><span>Request</span></button>
+                    <button onClick={() => handleLike(meal?._id)} className='btn px-6 text-xl'>{meal.isLiked ? <AiFillLike /> : <AiOutlineLike />}<span>{meal?.likes}</span></button>
+                    <button onClick={() => handleRequest(meal?._id, meal?.title, meal?.likes, meal?.reviews)} className='btn px-6 text-xl'><span>{checkRequest === true ? 'Requested' : 'Request'}</span></button>
                 </div>
             </div>
             <p>{meal?.description}</p>
