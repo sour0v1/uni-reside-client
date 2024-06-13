@@ -8,6 +8,7 @@ import { AuthContext } from '../../provider/AuthProvider';
 import axios from 'axios';
 import { updateProfile } from 'firebase/auth';
 import auth from '../../firebase/firebase.config';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
@@ -17,6 +18,14 @@ const SignUp = () => {
     // console.log(user)
     const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
     const [closed, setClosed] = useState(false);
+    const axiosPublic = useAxiosPublic();
+    const saveUser = async (name, email, image) => {
+        const userInfo = {
+            name, email, image, badge: 'bronze'
+        }
+        const res = await axiosPublic.post('/create-user', userInfo);
+        console.log(res.data);
+    }
 
     const onSubmit = async (data) => {
         setLoading(true);
@@ -44,6 +53,14 @@ const SignUp = () => {
                         displayName: name,
                         photoURL: photo
                     })
+                        .then(() => {
+                            // console.log(result.user);
+                            saveUser(result?.user?.displayName, result?.user?.email, result?.user?.photoURL
+                            )
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        })
                 }
                 reset();
             })
@@ -54,7 +71,7 @@ const SignUp = () => {
     };
     // console.log(watch('name'));
     // sign in with google
-    const handleGoogleSingIn = () =>{
+    const handleGoogleSingIn = () => {
         createUserByGoogle()
             .then(result => {
                 console.log(result.user);
@@ -64,7 +81,7 @@ const SignUp = () => {
             })
     }
     // sign in with google
-    const handleGithubSingIn = () =>{
+    const handleGithubSingIn = () => {
         createUserByGithub()
             .then(result => {
                 console.log(result.user);

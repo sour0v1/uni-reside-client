@@ -20,6 +20,18 @@ const MealDetails = () => {
         },
         enabled: !!id
     })
+    // request meal
+    const handleRequest = async(id) => {
+        const res = await axiosSecure.get(`/user?userEmail=${user?.email}`)
+        // console.log(res.data);
+        const userInfo = res.data;
+        if(res.data.badge === 'silver' || res.data.badge === 'gold' || res.data.badge === 'bronze'){
+           console.log('true');
+           const res = await axiosSecure.post(`/request-meal?id=${id}`, userInfo)
+           console.log(res.data);
+        }
+        console.log('false')
+    }
     // update 
     const handleLike = async (id) => {
         setCount(count + 1);
@@ -53,7 +65,7 @@ const MealDetails = () => {
                 <h1 className='text-2xl font-bold'>{meal?.title}</h1>
                 <div className='flex justify-center items-center gap-3'>
                     <button onClick={() => handleLike(meal?._id)} className='btn px-6 text-xl'>{meal.isLiked ? <AiFillLike />: <AiOutlineLike />}<span>{meal?.likes}</span></button>
-                    <button className='btn px-6 text-xl'><span>Request</span></button>
+                    <button onClick={() => handleRequest(meal?._id)} className='btn px-6 text-xl'><span>Request</span></button>
                 </div>
             </div>
             <p>{meal?.description}</p>
