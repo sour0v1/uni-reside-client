@@ -72,7 +72,7 @@ const AddMeal = () => {
                 </div>
                 <div className="flex flex-col gap-2 col-span-2">
                     <label htmlFor="">Description</label>
-                    <textarea {...register('description')} className="bg-gray-200 outline-none px-3" name="" id="" cols={2} rows={2}></textarea>
+                    <textarea {...register('description')} className="bg-gray-200 outline-none px-3" cols={2} rows={2}></textarea>
                 </div>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="">Rating</label>

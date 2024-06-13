@@ -21,7 +21,7 @@ const CategoryMeals = ({ mealCategory }) => {
                         }
                     </div>
                     <div className='w-full flex justify-center items-center my-3 '>
-                        <Link to={'/meals'} className={`${mealCategory !== 'all' && 'hidden'} border-b-2 rounded-b-xl px-3 hover:border-black hover:border-opacity-80`}>View More</Link>
+                        <Link to={'/meals'} className={`${mealCategory !== 'all' && 'hidden'} border-b-2 rounded-b-xl px-3 hover:border-black hover:border-opacity-80`}>View All</Link>
                     </div>
                 </div>
             }
