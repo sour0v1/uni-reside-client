@@ -23,7 +23,7 @@ const MealDetails = () => {
         enabled: !!id
     })
     // Review Count
-    const { data: review, isPending : isLoading, refetch: reload } = useQuery({
+    const { data: review, isPending: isLoading, refetch: reload } = useQuery({
         queryKey: ['review'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/review-count?id=${id}`);
@@ -71,27 +71,32 @@ const MealDetails = () => {
         return <p>Loading...</p>
     }
     return (
-        <div className='py-24 max-w-5xl mx-auto font-roboto space-y-3'>
+        <>
+        <div className='pt-24'>
 
-            <img className='h-[500px] w-full' src={meal?.image} alt="meal-food" />
-            <div className='flex justify-between items-center'>
-                <h1 className='text-2xl font-bold'>{meal?.title}</h1>
-                <div className='flex justify-center items-center gap-3'>
-                    <button onClick={() => handleLike(meal?._id)} className='btn px-6 text-xl flex'><span><AiOutlineLike /></span><span>{meal?.likes}</span></button>
-                    <button onClick={() => handleRequest(meal?._id, meal?.title, meal?.likes, meal?.reviews)} className='btn px-6 text-xl'><span>Request</span></button>
-                </div>
-            </div>
-            <p>{meal?.description}</p>
-            <p><span className='font-medium'>Ingredients : </span>{meal?.ingredients}</p>
-            <p><span className='font-medium'>Rating : </span>{meal?.rating}</p>
-            <p><span className='font-medium'>Distributor : </span>{meal?.adminName}</p>
-            <p><span className='font-medium'>Review : </span>{review?.length || 0}</p>
-            <textarea className='w-full bg-gray-100 px-3 py-2' placeholder='Post a review' id="review" cols={3} rows={3}></textarea>
-            <div className='w-full flex justify-end'>
-                <button onClick={handleReview} className='py-2 px-4 bg-[#373A40] text-white hover:bg-[#0C0C0C] '>Post</button>
-            </div>
-            <ToastContainer></ToastContainer>
         </div>
+            <div className='max-w-5xl mx-auto font-roboto space-y-3 shadow-lg mb-9 p-6'>
+
+                <img className='h-[500px] w-full' src={meal?.image} alt="meal-food" />
+                <div className='flex justify-between items-center'>
+                    <h1 className='text-2xl font-bold'>{meal?.title}</h1>
+                    <div className='flex justify-center items-center gap-3'>
+                        <button onClick={() => handleLike(meal?._id)} className='btn px-6 text-xl flex'><span><AiOutlineLike /></span><span>{meal?.likes}</span></button>
+                        <button onClick={() => handleRequest(meal?._id, meal?.title, meal?.likes, meal?.reviews)} className='btn px-6 text-xl'><span>Request</span></button>
+                    </div>
+                </div>
+                <p>{meal?.description}</p>
+                <p><span className='font-medium'>Ingredients : </span>{meal?.ingredients}</p>
+                <p><span className='font-medium'>Rating : </span>{meal?.rating}</p>
+                <p><span className='font-medium'>Distributor : </span>{meal?.adminName}</p>
+                <p><span className='font-medium'>Review : </span>{review?.length || 0}</p>
+                <textarea className='w-full bg-gray-100 px-3 py-2' placeholder='Post a review' id="review" cols={3} rows={3}></textarea>
+                <div className='w-full flex justify-end'>
+                    <button onClick={handleReview} className='py-2 px-4 bg-[#373A40] text-white hover:bg-[#0C0C0C] '>Post</button>
+                </div>
+                <ToastContainer></ToastContainer>
+            </div>
+        </>
     );
 };
 
