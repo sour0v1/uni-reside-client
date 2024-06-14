@@ -1,5 +1,6 @@
 
 import { MdOutlineCheck } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 const Membership = () => {
     return (
@@ -26,7 +27,7 @@ const Membership = () => {
                         </div>
                         
                     </div>
-                    <button className='w-full py-2 bg-[#373A40] text-white hover:bg-[#0C0C0C] '>Upgrade</button>
+                    <Link to={`/subscription/payment/silver`} className='w-full text-center py-2 bg-[#373A40] text-white hover:bg-[#0C0C0C] '>Upgrade</Link>
                 </div>
                 {/* card 2 */}
                 <div className='shadow p-6 rounded space-y-4 bg-gray-100 flex flex-col'>
@@ -48,7 +49,7 @@ const Membership = () => {
                         </div>
 
                     </div>
-                    <button className='w-full py-2 bg-[#373A40] text-white hover:bg-[#0C0C0C] '>Upgrade</button>
+                    <Link to={`/subscription/payment/gold`} className='w-full text-center py-2 bg-[#373A40] text-white hover:bg-[#0C0C0C] '>Upgrade</Link>
                 </div>
                 {/* card 3 */}
                 <div className='shadow p-6 rounded space-y-4 bg-gray-100 flex flex-col'>
@@ -70,7 +71,7 @@ const Membership = () => {
                         </div>
                         
                     </div>
-                    <button className='w-full py-2 bg-[#373A40] text-white hover:bg-[#0C0C0C] '>Upgrade</button>
+                    <Link to={`/subscription/payment/platinum`} className='w-full text-center py-2 bg-[#373A40] text-white hover:bg-[#0C0C0C] '>Upgrade</Link >
                 </div>
             </div>
         </div>

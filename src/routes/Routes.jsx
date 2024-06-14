@@ -10,6 +10,7 @@ import MealDetails from "../pages/mealDetails/MealDetails";
 import UserProfile from "../dashboard/user/UserProfile";
 import RequestedMeals from "../dashboard/user/RequestedMeals";
 import UserReviews from "../dashboard/user/UserReviews";
+import Payment from "../pages/payment/Payment";
 
 const router = createBrowserRouter([
     {
@@ -36,6 +37,11 @@ const router = createBrowserRouter([
                 path : '/meal/:id',
                 element : <MealDetails></MealDetails>
             },
+            {
+                path : '/subscription/payment/:membership',
+                element : <Payment></Payment>
+            }
+           
         ],
     },
     // dashboard
@@ -60,7 +66,8 @@ const router = createBrowserRouter([
             {
                 path : 'user/reviews',
                 element : <UserReviews></UserReviews>
-            }
+            },
+            
         ]
     }
 ])
