@@ -56,15 +56,15 @@ const Dashboard = () => {
                 </NavLink>
             </div> :
             <div id='routes' className='flex flex-col py-6 lg:col-span-3 px-6 gap-6 bg-slate-50 shadow'>
-                <NavLink to={'user-profile'} className={'flex justify-start items-center gap-2'}>
+                <NavLink to={'user/user-profile'} className={'flex justify-start items-center gap-2'}>
                     <span><CiUser /></span>
                     <span>My Profile</span>
                 </NavLink>
-                <NavLink to={'user-profile'} className={'flex justify-start items-center gap-2'}>
+                <NavLink to={'user/requested-meals'} className={'flex justify-start items-center gap-2'}>
                     <span><BiFoodMenu /></span>
                     <span>Requested Meals</span>
                 </NavLink>
-                <NavLink to={'user-profile'} className={'flex justify-start items-center gap-2'}>
+                <NavLink to={'user/reviews'} className={'flex justify-start items-center gap-2'}>
                     <span><MdOutlineReviews /></span>
                     <span>My Reviews</span>
                 </NavLink>
