@@ -33,7 +33,7 @@ const RequestedMeals = () => {
                     <tbody>
                         {/* row 1 */}
                         {
-                            meals.map((meal,idx) => <tr key={meal._id}>
+                            meals?.map((meal,idx) => <tr key={meal._id}>
                                 <th>{idx + 1}</th>
                                 <td>{meal?.title}</td>
                                 <td>{meal?.likes}</td>

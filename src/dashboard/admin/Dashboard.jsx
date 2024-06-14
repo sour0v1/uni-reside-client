@@ -13,66 +13,71 @@ import { BiFoodMenu } from 'react-icons/bi';
 import { CiUser } from 'react-icons/ci';
 
 const Dashboard = () => {
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const isAdmin = false;
     return (
         <div className='grid grid-cols-1 lg:grid-cols-12 gap-6 lg:max-w-6xl lg:mx-auto font-roboto my-9 bg-gray-100 p-9'>
             {/* routes */}
             {
                 isAdmin ?
-                <div id='routes' className='flex flex-col py-6 lg:col-span-3 px-6 gap-6 bg-slate-50 shadow'>
-                <NavLink to={'admin-profile'} className={'flex justify-start items-center gap-2'}>
-                    <span><RiAdminLine /></span>
-                    <span>Admin Profile</span>
-                </NavLink>
-                <NavLink to={'manage-users'} className={'flex justify-start items-center gap-2'}>
-                    <span><FiUsers /></span>
-                    <span>Manage Users</span>
-                </NavLink>
-                <NavLink to={'add-meal'} className={'flex justify-start items-center gap-2'}>
-                    <span><GiMeal /></span>
-                    <span>Add Meal</span>
-                </NavLink>
-                <NavLink to={'all-meals'} className={'flex justify-start items-center gap-2'}>
-                    <span><GiHotMeal /></span>
-                    <span>All Meals</span>
-                </NavLink>
-                <NavLink to={'all-reviews'} className={'flex justify-start items-center gap-2'}>
-                    <span><MdOutlineRateReview /></span>
-                    <span>All Reviews</span>
-                </NavLink>
-                <NavLink to={'serve-meals'} className={'flex justify-start items-center gap-2'}>
-                    <span><PiChefHat /></span>
-                    <span>Serve Meals</span>
-                </NavLink>
-                <NavLink to={'upcoming-meals'} className={'flex justify-start items-center gap-2'}>
-                    <span><GiMeal /></span>
-                    <span>Upcoming Meals</span>
-                </NavLink>
-                <hr />
-                <NavLink to={'/'} className={'flex justify-start items-center gap-2'}>
-                    <span><FaHome /></span>
-                    <span>Home</span>
-                </NavLink>
-            </div> :
-            <div id='routes' className='flex flex-col py-6 lg:col-span-3 px-6 gap-6 bg-slate-50 shadow'>
-                <NavLink to={'user/user-profile'} className={'flex justify-start items-center gap-2'}>
-                    <span><CiUser /></span>
-                    <span>My Profile</span>
-                </NavLink>
-                <NavLink to={'user/requested-meals'} className={'flex justify-start items-center gap-2'}>
-                    <span><BiFoodMenu /></span>
-                    <span>Requested Meals</span>
-                </NavLink>
-                <NavLink to={'user/reviews'} className={'flex justify-start items-center gap-2'}>
-                    <span><MdOutlineReviews /></span>
-                    <span>My Reviews</span>
-                </NavLink>
-                <NavLink to={'user-profile'} className={'flex justify-start items-center gap-2'}>
-                    <span><MdOutlinePayment /></span>
-                    <span>Payment History</span>
-                </NavLink>
-            </div>
+                    <div id='routes' className='flex flex-col py-6 lg:col-span-3 px-6 gap-6 bg-slate-50 shadow'>
+                        <NavLink to={'admin-profile'} className={'flex justify-start items-center gap-2'}>
+                            <span><RiAdminLine /></span>
+                            <span>Admin Profile</span>
+                        </NavLink>
+                        <NavLink to={'manage-users'} className={'flex justify-start items-center gap-2'}>
+                            <span><FiUsers /></span>
+                            <span>Manage Users</span>
+                        </NavLink>
+                        <NavLink to={'add-meal'} className={'flex justify-start items-center gap-2'}>
+                            <span><GiMeal /></span>
+                            <span>Add Meal</span>
+                        </NavLink>
+                        <NavLink to={'all-meals'} className={'flex justify-start items-center gap-2'}>
+                            <span><GiHotMeal /></span>
+                            <span>All Meals</span>
+                        </NavLink>
+                        <NavLink to={'all-reviews'} className={'flex justify-start items-center gap-2'}>
+                            <span><MdOutlineRateReview /></span>
+                            <span>All Reviews</span>
+                        </NavLink>
+                        <NavLink to={'serve-meals'} className={'flex justify-start items-center gap-2'}>
+                            <span><PiChefHat /></span>
+                            <span>Serve Meals</span>
+                        </NavLink>
+                        <NavLink to={'upcoming-meals'} className={'flex justify-start items-center gap-2'}>
+                            <span><GiMeal /></span>
+                            <span>Upcoming Meals</span>
+                        </NavLink>
+                        <hr />
+                        <NavLink to={'/'} className={'flex justify-start items-center gap-2'}>
+                            <span><FaHome /></span>
+                            <span>Home</span>
+                        </NavLink>
+                    </div> :
+                    <div id='routes' className='flex flex-col py-6 lg:col-span-3 px-6 gap-6 bg-slate-50 shadow'>
+                        <NavLink to={'user/user-profile'} className={'flex justify-start items-center gap-2'}>
+                            <span><CiUser /></span>
+                            <span>My Profile</span>
+                        </NavLink>
+                        <NavLink to={'user/requested-meals'} className={'flex justify-start items-center gap-2'}>
+                            <span><BiFoodMenu /></span>
+                            <span>Requested Meals</span>
+                        </NavLink>
+                        <NavLink to={'user/reviews'} className={'flex justify-start items-center gap-2'}>
+                            <span><MdOutlineReviews /></span>
+                            <span>My Reviews</span>
+                        </NavLink>
+                        <NavLink to={'user-profile'} className={'flex justify-start items-center gap-2'}>
+                            <span><MdOutlinePayment /></span>
+                            <span>Payment History</span>
+                        </NavLink>
+                        <hr />
+                        <NavLink to={'/'} className={'flex justify-start items-center gap-2'}>
+                            <span><FaHome /></span>
+                            <span>Home</span>
+                        </NavLink>
+                    </div>
             }
             {/* display */}
             <div className='lg:col-span-9 py-6 bg-slate-50 shadow'>

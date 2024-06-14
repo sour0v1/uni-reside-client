@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const MealDetails = () => {
     const { user } = useContext(AuthContext);
-    // const [count, setCount] = useState('')
+    const [count, setCount] = useState(true)
     const { id } = useParams();
     const axiosSecure = useAxiosSecure();
     console.log(id);
@@ -67,6 +67,13 @@ const MealDetails = () => {
             toast('Posted Successfully!');
         }
     }
+    const handleChange = (event) =>{
+        if(event.target.value){
+           return setCount(false);
+        }
+        return setCount(true);
+    }
+    // console.log('count',count)
     if (isPending && isLoading) {
         return <p>Loading...</p>
     }
@@ -90,9 +97,9 @@ const MealDetails = () => {
                 <p><span className='font-medium'>Rating : </span>{meal?.rating}</p>
                 <p><span className='font-medium'>Distributor : </span>{meal?.adminName}</p>
                 <p><span className='font-medium'>Review : </span>{review?.length || 0}</p>
-                <textarea className='w-full bg-gray-100 px-3 py-2' placeholder='Post a review' id="review" cols={3} rows={3}></textarea>
+                <textarea onChange={handleChange} className='w-full bg-gray-100 px-3 py-2' placeholder='Post a review' id="review" cols={3} rows={3}></textarea>
                 <div className='w-full flex justify-end'>
-                    <button onClick={handleReview} className='py-2 px-4 bg-[#373A40] text-white hover:bg-[#0C0C0C] '>Post</button>
+                    <button onClick={handleReview} disabled ={count} className={`py-2 px-4 text-white ${count ? 'bg-[#373A40]' : 'bg-[#0C0C0C]'}`}>Post</button>
                 </div>
                 <ToastContainer></ToastContainer>
             </div>

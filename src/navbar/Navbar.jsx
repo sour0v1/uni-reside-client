@@ -56,7 +56,7 @@ const Navbar = () => {
 
                 <div className={`font-roboto border text-black bg-white shadow-sm flex flex-col justify-start w-1/2 lg:w-fit h-screen lg:h-auto gap-3 items-center px-6 py-6 absolute lg:rounded ${!open1 ? '-left-[800px]' : ' z-20  top-0 left-0 lg:left-auto lg:top-16 lg:right-16'} `}>
                     <p className='font-medium'>{user?.displayName || 'Unknown'}</p>
-                    <NavLink to={'/dashboard'} className={'dash'}>Dashboard</NavLink>
+                    <NavLink to={'/dashboard/user/user-profile'} className={'dash'}>Dashboard</NavLink>
                     <button className='btn1' onClick={handleLogOut}>Log Out</button>
                     <button className='text-2xl bg-gray-100 hover:bg-gray-200 px-2 py-2 rounded-full' onClick={() => setOpen1(!open1)}><RxCross1 /></button>
                 </div>
