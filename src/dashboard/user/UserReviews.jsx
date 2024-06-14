@@ -2,11 +2,12 @@ import React, { useContext } from 'react';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../../provider/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { MdDelete } from 'react-icons/md';
 
 const UserReviews = () => {
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
     const { data: reviews } = useQuery({
         queryKey: ['reviews'],
@@ -16,6 +17,9 @@ const UserReviews = () => {
         },
         enabled: !!user?.email
     })
+    const handleNavigate = (id) => {
+        navigate(`/meal/${id}`)
+    }   
     console.log(reviews);
     return (
         <div>
@@ -43,7 +47,7 @@ const UserReviews = () => {
                                 <td>{meal?.review}</td>
                                 <td><button className='underline'>Edit</button></td>
                                 <td><button className='btn text-xl'><MdDelete /></button></td>
-                                <Link to={`/meal/${meal?.mealId}`}><td className='btn my-2'>View Meal</td></Link>
+                                <td className='btn my-2'><button onClick={() => handleNavigate(meal?.mealId)}>View Meal</button></td>
                             </tr>)
                         }
                     </tbody>
