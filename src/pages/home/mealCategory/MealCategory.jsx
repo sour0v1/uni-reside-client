@@ -4,21 +4,8 @@ import MealCard from '../../../components/MealCard';
 import CategoryMeals from '../../../components/CategoryMeals'
 
 const MealCategory = () => {
-    // const breakfast = useCategory('breakfast');
-    // const lunch = useCategory('lunch');
-    // const dinner = useCategory('dinner');
-    // const all = useCategory('all');
-    // const axiosPublic = useAxiosPublic();
-
-    // const {data : meals} = useQuery({
-    //     queryKey : ['meals'],
-    //     queryFn : async () => {
-    //         const res = await axiosPublic.get(`/all-meals`);
-    //         return res.data;
-    //     }
-    // })
     return (
-        <div className='mb-9 font-roboto'>
+        <div className='mt-16 font-roboto'>
             <Tabs defaultIndex={0} onSelect={(index) => console.log(index)}>
                 <TabList className={'flex justify-center items-center mb-9'}>
                     <Tab>

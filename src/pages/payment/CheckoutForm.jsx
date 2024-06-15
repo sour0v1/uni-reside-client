@@ -75,20 +75,22 @@ const CheckoutForm = () => {
             .then(async (result) => {
                 console.log('confirm payment -', result);
                 if (result.paymentIntent.status === 'succeeded') {
+                    const paymentInfo = {
+                        email: user?.email,
+                        date: moment().format('MMM DD, YYYY, h:mm:ss A'),
+                        price: data?.price,
+                        transactionId: result.paymentIntent.id,
+                        badge: data?.package
+                    }
+                    const res = await axiosSecure.post('/payment-history', paymentInfo)
+                    // console.log(res.data);
+                    const userRes = await axiosSecure.patch(`/update-user?email=${user?.email}&updatedBadge=${data?.package}`)
+                    console.log(userRes.data);
                     Swal.fire({
                         title: "Success!",
                         text: "Successful Payment",
                         icon: "success"
                     });
-                    const paymentInfo = {
-                        email : user?.email,
-                        date : moment().format('MMM DD, YYYY, h:mm:ss A'),
-                        price : data?.price,
-                        transactionId : result.paymentIntent.id,
-                        badge : data?.package
-                    }
-                    const res = await axiosSecure.post('/payment-history', paymentInfo)
-                    console.log(res.data);
                 }
             })
             .catch(error => {
