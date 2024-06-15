@@ -4,9 +4,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { AuthContext } from '../../provider/AuthProvider';
+import Swal from 'sweetalert2';
+import moment from 'moment';
 
 const CheckoutForm = () => {
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const { membership } = useParams();
     const axiosSecure = useAxiosSecure();
     const [error, setError] = useState(null);
@@ -19,10 +21,10 @@ const CheckoutForm = () => {
             const res = await axiosSecure.get(`/membership?membership=${membership}`)
             return res.data;
         },
-        enabled : !!membership
+        enabled: !!membership
     })
     // console.log(data);
-    console.log('secret -',clientSecret);
+    // console.log('secret -',clientSecret);
 
     useEffect(() => {
         const getClientSecret = async () => {
@@ -62,20 +64,36 @@ const CheckoutForm = () => {
         }
         // confirm card payment
         stripe.confirmCardPayment(clientSecret, {
-            payment_method : {
-                card : card,
-                billing_details : {
-                    name : user?.displayName,
-                    email : user?.email
+            payment_method: {
+                card: card,
+                billing_details: {
+                    name: user?.displayName,
+                    email: user?.email
                 }
             }
         })
-        .then(result => {
-            console.log('confirm payment -',result);
-        })
-        .catch(error => {
-            console.log(error);
-        })
+            .then(async (result) => {
+                console.log('confirm payment -', result);
+                if (result.paymentIntent.status === 'succeeded') {
+                    Swal.fire({
+                        title: "Success!",
+                        text: "Successful Payment",
+                        icon: "success"
+                    });
+                    const paymentInfo = {
+                        email : user?.email,
+                        date : moment().format('MMM DD, YYYY, h:mm:ss A'),
+                        price : data?.price,
+                        transactionId : result.paymentIntent.id,
+                        badge : data?.package
+                    }
+                    const res = await axiosSecure.post('/payment-history', paymentInfo)
+                    console.log(res.data);
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
     return (
         <form className='w-1/3 flex flex-col justify-center items-center gap-3 shadow-lg p-9 mx-auto font-roboto mb-9' onSubmit={handleSubmit}>
@@ -104,7 +122,7 @@ const CheckoutForm = () => {
 
             </div>
             {error && <p className='text-red-500'>{error}</p>}
-            <button className='btn btn-warning' type="submit" disabled={!stripe}>
+            <button className='btn btn-warning' type="submit" disabled={!stripe && !clientSecret}>
                 Pay
             </button>
         </form>

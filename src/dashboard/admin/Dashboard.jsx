@@ -68,7 +68,7 @@ const Dashboard = () => {
                             <span><MdOutlineReviews /></span>
                             <span>My Reviews</span>
                         </NavLink>
-                        <NavLink to={''} className={'flex justify-start items-center gap-2'}>
+                        <NavLink to={'user/payment/history'} className={'flex justify-start items-center gap-2'}>
                             <span><MdOutlinePayment /></span>
                             <span>Payment History</span>
                         </NavLink>

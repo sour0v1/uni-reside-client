@@ -11,6 +11,7 @@ import UserProfile from "../dashboard/user/UserProfile";
 import RequestedMeals from "../dashboard/user/RequestedMeals";
 import UserReviews from "../dashboard/user/UserReviews";
 import Payment from "../pages/payment/Payment";
+import PaymentHistory from "../dashboard/user/PaymentHistory";
 
 const router = createBrowserRouter([
     {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
                 path : 'user/reviews',
                 element : <UserReviews></UserReviews>
             },
+            {
+                path : 'user/payment/history',
+                element : <PaymentHistory></PaymentHistory>
+            }
             
         ]
     }
