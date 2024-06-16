@@ -53,7 +53,7 @@ const Dashboard = () => {
                             <span><MdOutlineRateReview /></span>
                             <span>All Reviews</span>
                         </NavLink>
-                        <NavLink to={'serve-meals'} className={'flex justify-start items-center gap-2'}>
+                        <NavLink to={'admin/serve-meals'} className={'flex justify-start items-center gap-2'}>
                             <span><PiChefHat /></span>
                             <span>Serve Meals</span>
                         </NavLink>
