@@ -14,6 +14,7 @@ import Payment from "../pages/payment/Payment";
 import PaymentHistory from "../dashboard/user/PaymentHistory";
 import AdminProfile from "../dashboard/admin/AdminProfile";
 import ManageUser from "../dashboard/admin/ManageUser";
+import Reviews from "../dashboard/admin/Reviews";
 
 const router = createBrowserRouter([
     {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
             {
                 path : 'admin/manage-users',
                 element : <ManageUser></ManageUser>
+            },
+            {
+                path : 'admin/all-reviews',
+                element : <Reviews></Reviews>
             },
             // user routes
             {
