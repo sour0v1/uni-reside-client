@@ -16,8 +16,8 @@ const ServeMeals = () => {
         },
     })
     console.log(requestedMeals);
-    const handleStatus = async (id) => {
-        const res = await axiosSecure.put(`/update-status?id=${id}`)
+    const handleStatus = async (id, email) => {
+        const res = await axiosSecure.put(`/update-status?id=${id}&email=${email}`)
         console.log(res.data);
         if (res.data.modifiedCount) {
             refetch();
@@ -69,7 +69,9 @@ const ServeMeals = () => {
                                 <td>{meal?.userEmail}</td>
                                 <td>{meal?.userName}</td>
                                 <td className={`${meal?.status === 'delivered' ? 'text-green-600' : 'text-orange-600'}`}>{meal?.status}</td>
-                                <td onClick={() => handleStatus(meal?.mealId)} className='btn my-3 ml-3'>Serve</td>
+                                {
+                                    meal?.status === 'pending' && <td onClick={() => handleStatus(meal?.mealId, meal?.userEmail)} className='btn my-3 ml-3'>Serve</td> 
+                                }
                             </tr>)
                         }
                     </tbody>
