@@ -26,7 +26,7 @@ const AdminProfile = () => {
     console.log(mealLength);
     return (
         <div className='flex justify-center items-center'>
-            <div className='w-2/3 p-9 shadow-lg flex flex-col justify-center items-center gap-3 font-medium'>
+            <div className='lg:w-2/3 p-9 shadow-lg flex flex-col justify-center items-center gap-3 font-medium'>
                 <img className='w-36 h-36 rounded-full' src={userInfo?.image} alt="" />
                 <h1>Name : {userInfo?.name}</h1>
                 <h1>Email : {userInfo?.email}</h1>

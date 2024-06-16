@@ -84,7 +84,7 @@ const MealDetails = () => {
         </div>
             <div className='max-w-5xl mx-auto font-roboto space-y-3 shadow-lg mb-9 p-6'>
 
-                <img className='h-[500px] w-full' src={meal?.image} alt="meal-food" />
+                <img className='lg:h-[500px] w-full' src={meal?.image} alt="meal-food" />
                 <div className='flex justify-between items-center'>
                     <h1 className='text-2xl font-bold'>{meal?.title}</h1>
                     <div className='flex justify-center items-center gap-3'>

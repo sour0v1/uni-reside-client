@@ -98,7 +98,7 @@ const CheckoutForm = () => {
             })
     }
     return (
-        <form className='w-1/3 flex flex-col justify-center items-center gap-3 shadow-lg p-9 mx-auto font-roboto mb-9' onSubmit={handleSubmit}>
+        <form className='lg:w-1/3 mx-6 flex flex-col justify-center items-center gap-3 shadow-lg p-9 lg:mx-auto font-roboto mb-9' onSubmit={handleSubmit}>
             <div>
                 <p><span className='font-medium'>Membership : {data?.package}</span></p>
                 <p><span className='font-medium'>Price : {data?.price}$</span></p>

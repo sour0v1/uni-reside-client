@@ -45,8 +45,8 @@ const AddMeal = () => {
 
     // console.log(watch("example"));
     return (
-        <div className="font-roboto px-9 lg:px-0">
-            <form onSubmit={handleSubmit(onSubmit)} className="px-9 grid grid-cols-1 lg:grid-cols-2 lg:gap-6">
+        <div className="font-roboto lg:px-0">
+            <form onSubmit={handleSubmit(onSubmit)} className="px-6 lg:grid lg:grid-cols-2 lg:gap-6 flex flex-col gap-6 lg:flex-none">
                 <div className="flex flex-col gap-2">
                     <label htmlFor="">Meal Title</label>
                     <input {...register('title')} className="py-1 px-3 bg-gray-200 outline-none" type="text" />
@@ -73,7 +73,7 @@ const AddMeal = () => {
                     <label htmlFor="">Price</label>
                     <input {...register('price')} className="py-1 px-3 bg-gray-200 outline-none" type="text" />
                 </div>
-                <div className="flex flex-col gap-2 col-span-2">
+                <div className="flex flex-col gap-2 lg:col-span-2">
                     <label htmlFor="">Description</label>
                     <textarea {...register('description')} className="bg-gray-200 outline-none px-3" cols={2} rows={2}></textarea>
                 </div>

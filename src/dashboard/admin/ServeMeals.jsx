@@ -43,7 +43,7 @@ const ServeMeals = () => {
         <div>
             <div className="overflow-x-auto px-6 font-roboto">
                 <div className='flex justify-center items-center relative w-full text-center border'>
-                    <div className='w-2/3 relative'>
+                    <div className='lg:w-2/3 relative'>
                         <input onChange={handleSearch} className='w-full py-2 px-3 bg-gray-200 my-3 rounded-full' type="text" placeholder='Email or UserName' />
                         <span className='absolute text-xl right-4 top-5 opacity-70'><IoSearch /></span>
                     </div>

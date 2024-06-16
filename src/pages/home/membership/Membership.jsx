@@ -10,7 +10,7 @@ const Membership = () => {
                 {/* card 1 */}
                 <div className='flex flex-col shadow p-6 rounded space-y-4 bg-gray-100'>
                     <h4 className='font-bold'>Silver</h4>
-                    <h2 className='text-4xl font-bold'>$10<sub className='opacity-30'>/month</sub></h2>
+                    <h2 className='text-4xl font-bold'>$50</h2>
                     <p>Exclusive perks for our Silver Members!</p>
                     <div className='flex flex-col gap-3 grow'>
                         <div className='flex justify-start items-center gap-2'>
@@ -32,7 +32,7 @@ const Membership = () => {
                 {/* card 2 */}
                 <div className='shadow p-6 rounded space-y-4 bg-gray-100 flex flex-col'>
                     <h4 className='font-bold'>Gold</h4>
-                    <h2 className='text-4xl font-bold'>$20<sub className='opacity-30'>/month</sub></h2>
+                    <h2 className='text-4xl font-bold'>$100</h2>
                     <p>Gold Membership: Premium Benefits for University Residents</p>
                     <div className='flex flex-col gap-3 grow'>
                         <div className='flex justify-start items-center gap-2'>
@@ -54,7 +54,7 @@ const Membership = () => {
                 {/* card 3 */}
                 <div className='shadow p-6 rounded space-y-4 bg-gray-100 flex flex-col'>
                     <h4 className='font-bold grow'>Platinum</h4>
-                    <h2 className='text-4xl font-bold grow'>$50<sub className='opacity-30'>/month</sub></h2>
+                    <h2 className='text-4xl font-bold grow'>$200</h2>
                     <p>Exclusive access to premium hostel services</p>
                     <div className='flex flex-col gap-3 grow'>
                         <div className='flex justify-start items-center gap-2'>
