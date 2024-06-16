@@ -8,6 +8,7 @@ import { IoSearch } from 'react-icons/io5';
 const ManageUser = () => {
     const { user } = useContext(AuthContext);
     const [users, setUsers] = useState([]);
+    const [count, setCount] = useState(false);
     const axiosSecure = useAxiosSecure();
     const { data, isPending, refetch } = useQuery({
         queryKey: ['users'],
@@ -49,6 +50,13 @@ const ManageUser = () => {
         const searchValue = event.target.value;
         console.log(searchValue);
 
+        if(searchValue){
+            setCount(true);
+        }
+        else{
+            setCount(false);
+        }
+
         const res = await axiosSecure.get(`/user-search?searchValue=${searchValue}`)
         console.log(res.data);
         setUsers(res.data);
@@ -80,7 +88,7 @@ const ManageUser = () => {
                     <tbody>
                         {/* row 1 */}
                         {
-                            (users ? users : data)?.map((user, idx) => <tr key={user._id}>
+                            (count ? users : data)?.map((user, idx) => <tr key={user._id}>
                                 <th>{idx + 1}</th>
                                 <td>{user?.name}</td>
                                 <td>{user?.email}</td>
