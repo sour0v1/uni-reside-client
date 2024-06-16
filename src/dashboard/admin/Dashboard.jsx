@@ -37,7 +37,7 @@ const Dashboard = () => {
                             <span><RiAdminLine /></span>
                             <span>Admin Profile</span>
                         </NavLink>
-                        <NavLink to={'manage-users'} className={'flex justify-start items-center gap-2'}>
+                        <NavLink to={'admin/manage-users'} className={'flex justify-start items-center gap-2'}>
                             <span><FiUsers /></span>
                             <span>Manage Users</span>
                         </NavLink>

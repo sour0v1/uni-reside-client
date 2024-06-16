@@ -13,6 +13,7 @@ import UserReviews from "../dashboard/user/UserReviews";
 import Payment from "../pages/payment/Payment";
 import PaymentHistory from "../dashboard/user/PaymentHistory";
 import AdminProfile from "../dashboard/admin/AdminProfile";
+import ManageUser from "../dashboard/admin/ManageUser";
 
 const router = createBrowserRouter([
     {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
             {
                 path: 'admin/add-meal',
                 element: <AddMeal></AddMeal>
+            },
+            {
+                path : 'admin/manage-users',
+                element : <ManageUser></ManageUser>
             },
             // user routes
             {
