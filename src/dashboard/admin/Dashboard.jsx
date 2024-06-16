@@ -11,17 +11,29 @@ import { useContext } from 'react';
 import { AuthContext } from '../../provider/AuthProvider';
 import { BiFoodMenu } from 'react-icons/bi';
 import { CiUser } from 'react-icons/ci';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext);
-    const isAdmin = false;
+    const axiosSecure = useAxiosSecure();
+    const {data : userRole} = useQuery({
+        queryKey : ['userRole'],
+        queryFn : async () => {
+            const res = await axiosSecure.get(`/user?userEmail=${user?.email}`);
+            return res.data;
+        },
+        enabled : !!user?.email
+    })
+    console.log(userRole)
+    const isAdmin = userRole?.role;
     return (
         <div className='grid grid-cols-1 lg:grid-cols-12 gap-6 lg:max-w-6xl lg:mx-auto font-roboto my-9 bg-gray-100 p-9'>
             {/* routes */}
             {
-                isAdmin ?
+                isAdmin === 'admin' ?
                     <div id='routes' className='flex flex-col py-6 lg:col-span-3 px-6 gap-6 bg-slate-50 shadow'>
-                        <NavLink to={'admin-profile'} className={'flex justify-start items-center gap-2'}>
+                        <NavLink to={'admin/profile'} className={'flex justify-start items-center gap-2'}>
                             <span><RiAdminLine /></span>
                             <span>Admin Profile</span>
                         </NavLink>
@@ -29,7 +41,7 @@ const Dashboard = () => {
                             <span><FiUsers /></span>
                             <span>Manage Users</span>
                         </NavLink>
-                        <NavLink to={'add-meal'} className={'flex justify-start items-center gap-2'}>
+                        <NavLink to={'admin/add-meal'} className={'flex justify-start items-center gap-2'}>
                             <span><GiMeal /></span>
                             <span>Add Meal</span>
                         </NavLink>
@@ -56,7 +68,7 @@ const Dashboard = () => {
                         </NavLink>
                     </div> :
                     <div id='routes' className='flex flex-col py-6 lg:col-span-3 px-6 gap-6 bg-slate-50 shadow'>
-                        <NavLink to={'user/user-profile'} className={'flex justify-start items-center gap-2'}>
+                        <NavLink to={''} className={'flex justify-start items-center gap-2'}>
                             <span><CiUser /></span>
                             <span>My Profile</span>
                         </NavLink>

@@ -12,6 +12,7 @@ import RequestedMeals from "../dashboard/user/RequestedMeals";
 import UserReviews from "../dashboard/user/UserReviews";
 import Payment from "../pages/payment/Payment";
 import PaymentHistory from "../dashboard/user/PaymentHistory";
+import AdminProfile from "../dashboard/admin/AdminProfile";
 
 const router = createBrowserRouter([
     {
@@ -52,7 +53,11 @@ const router = createBrowserRouter([
         children: [
             // admin routes
             {
-                path: 'add-meal',
+                path : 'admin/profile',
+                element : <AdminProfile></AdminProfile>
+            },
+            {
+                path: 'admin/add-meal',
                 element: <AddMeal></AddMeal>
             },
             // user routes

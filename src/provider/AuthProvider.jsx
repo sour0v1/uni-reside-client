@@ -11,9 +11,9 @@ const AuthProvider = ({children}) => {
     const githubProvider = new GithubAuthProvider();
 
     // create user by email
-    const createUserByEmail = async (email, password) =>{
+    const createUserByEmail = (email, password) =>{
         setLoading(true);
-        return await createUserWithEmailAndPassword(auth, email, password);
+        return createUserWithEmailAndPassword(auth, email, password);
     }
     // create user by google
     const createUserByGoogle = () => {

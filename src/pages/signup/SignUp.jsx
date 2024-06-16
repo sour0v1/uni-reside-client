@@ -21,7 +21,7 @@ const SignUp = () => {
     const axiosPublic = useAxiosPublic();
     const saveUser = async (name, email, image) => {
         const userInfo = {
-            name, email, userPhoto : image, badge: 'bronze'
+            name, email, userPhoto : image, badge: 'bronze', role : 'user'
         }
         const res = await axiosPublic.post('/create-user', userInfo);
         console.log(res.data);
@@ -54,7 +54,7 @@ const SignUp = () => {
                         photoURL: photo
                     })
                         .then(() => {
-                            // console.log(result.user);
+                            console.log(result.user);
                             saveUser(result?.user?.displayName, result?.user?.email, result?.user?.photoURL
                             )
                         })

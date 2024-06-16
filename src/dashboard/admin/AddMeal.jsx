@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useContext } from "react";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 const AddMeal = () => {
     const axiosSecure = useAxiosSecure();
+    const {user} = useContext(AuthContext);
     // const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = async (data) => {
@@ -54,7 +57,7 @@ const AddMeal = () => {
                 </div>
                 <div className="flex flex-col gap-2 lg:col-span-2">
                     <label htmlFor="">Ingredients</label>
-                    <input {...register('ingredients')} className="py-1 px-3 bg-gray-200 outline-none" type="text" />
+                    <input {...register('ingredients')} className="py-1 px-3 bg-gray-200 outline-none" type="text" placeholder="Ingredient 1, Ingredient 2 " />
                 </div>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="">Category</label>
@@ -92,11 +95,11 @@ const AddMeal = () => {
                 </div>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="">Admin Name</label>
-                    <input {...register('adminName')} className="py-1 px-3 bg-gray-200 outline-none" type="text" />
+                    <input defaultValue={user?.displayName} {...register('adminName')} className="py-1 px-3 bg-gray-200 outline-none" type="text" />
                 </div>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="">Email</label>
-                    <input {...register('email')} className="py-1 px-3 bg-gray-200 outline-none" type="email" />
+                    <input defaultValue={user?.email} {...register('email')} className="py-1 px-3 bg-gray-200 outline-none" type="email" />
                 </div>
                 <input className='py-2 rounded bg-[#373A40] text-white hover:bg-[#0C0C0C] col-span-2' type="submit" value="Add Meal" />
             </form>
