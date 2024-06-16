@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { MdDelete } from 'react-icons/md';
 
 // TODO : implement update and delete
 const AllMeals = () => {
+    const [sortedMeals, setSortedMeals] = useState([]);
     const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
     const { data: allMeals } = useQuery({
@@ -17,12 +18,36 @@ const AllMeals = () => {
     })
     console.log(allMeals);
 
+    const handleSort = async (event) => {
+        const sortValue = event.target.value;
+        console.log(sortValue);
+        const sort = [...allMeals].sort((a, b) => {
+            if (sortValue === 'likes') {
+                return b.likes - a.likes;
+            }
+            else if (sortValue === 'reviews') {
+                return parseInt(b.reviews) - parseInt(a.reviews)
+            }
+            else {
+                return [...allMeals]
+            }
+        })
+        setSortedMeals(sort);
+    }
+
     const handleNavigate = (id) => {
         navigate(`/meal/${id}`)
     }
     return (
         <div>
             <div className="overflow-x-auto px-6 font-roboto">
+                <div className='w-full text-end'>
+                    <select onChange={handleSort} className="bg-gray-200 py-3 px-2 border-2 border-opacity-80 " name="" id="">
+                        <option value="all">Sort By</option>
+                        <option value="likes">Likes</option>
+                        <option value="reviews">Reviews</option>
+                    </select>
+                </div>
                 <table className="table">
                     {/* head */}
                     <thead>
@@ -40,7 +65,7 @@ const AllMeals = () => {
                     <tbody>
                         {/* row 1 */}
                         {
-                            allMeals?.map((meal, idx) => <tr key={meal._id}>
+                            (sortedMeals.length > 0 ? sortedMeals : allMeals)?.map((meal, idx) => <tr key={meal._id}>
                                 <th>{idx + 1}</th>
                                 <td>{meal?.title}</td>
                                 <td>{meal?.likes}</td>

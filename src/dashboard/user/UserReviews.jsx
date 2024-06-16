@@ -19,7 +19,7 @@ const UserReviews = () => {
     })
     const handleNavigate = (id) => {
         navigate(`/meal/${id}`)
-    }   
+    }
     console.log(reviews);
     return (
         <div>
@@ -47,7 +47,7 @@ const UserReviews = () => {
                                 <td>{meal?.review}</td>
                                 <td><button className='underline'>Edit</button></td>
                                 <td><button className='btn text-xl'><MdDelete /></button></td>
-                                <td  onClick={() => handleNavigate(meal?.mealId)} className='btn my-2'><button>View Meal</button></td>
+                                <td onClick={() => handleNavigate(meal?.mealId)} className='btn my-2'><button>View Meal</button></td>
                             </tr>)
                         }
                     </tbody>
