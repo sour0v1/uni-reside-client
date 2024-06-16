@@ -42,7 +42,10 @@ const Navbar = () => {
     return (
         <>
             <div className={`font-roboto flex justify-between items-center lg:px-16 py-5 bg-[#373A40] bg-opacity-35 fixed z-10 w-full text-white ${!open ? 'px-6' : 'pr-6'}`}>
-                <h1 className="text-2xl">UniReside</h1>
+                <div className='flex justify-center items-center gap-2'>
+                    <h1 className='bg-white text-white bg-opacity-40 opacity-90 font-bold text-4xl w-9 h-9 flex justify-center items-center'>U</h1>
+                    <h1 className="text-2xl font-semibold opacity-90">UniReside</h1>
+                </div>
                 <ul className={`flex justify-start items-center gap-6 flex-col lg:flex-row absolute lg:static  bg-[#373A40] lg:bg-opacity-0 h-screen lg:h-auto w-1/2 lg:w-auto py-6 lg:py-0 lg:px-0 ${open ? 'top-0' : 'left-[800px]'}`}>
                     <NavLink to={'/'}>Home</NavLink>
                     <NavLink to={'/meals'}>Meals</NavLink>
@@ -69,7 +72,7 @@ const Navbar = () => {
 
                 <div className={`font-roboto border text-black bg-white shadow-sm flex flex-col justify-start w-1/2 lg:w-fit h-screen lg:h-auto gap-3 items-center px-6 py-6 absolute lg:rounded ${!open1 ? '-left-[800px]' : ' z-20  top-0 left-0 lg:left-auto lg:top-16 lg:right-16'} `}>
                     <p className='font-medium'>{user?.displayName || 'Unknown'}</p>
-                    <NavLink to={`/dashboard/${isAdmin === 'admin'?'admin/profile' : 'user/user-profile'}`} className={'dash'}>Dashboard</NavLink>
+                    <NavLink to={`/dashboard/${isAdmin === 'admin' ? 'admin/profile' : 'user/user-profile'}`} className={'dash'}>Dashboard</NavLink>
                     <button className='btn1' onClick={handleLogOut}>Log Out</button>
                     <button className='text-2xl bg-gray-100 hover:bg-gray-200 px-2 py-2 rounded-full' onClick={() => setOpen1(!open1)}><RxCross1 /></button>
                 </div>

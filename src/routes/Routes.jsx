@@ -17,6 +17,7 @@ import ManageUser from "../dashboard/admin/ManageUser";
 import Reviews from "../dashboard/admin/Reviews";
 import AllMeals from "../dashboard/admin/AllMeals";
 import ServeMeals from "../dashboard/admin/ServeMeals";
+import UpcomingMeals from "../pages/upcomingMeals/UpcomingMeals";
 
 const router = createBrowserRouter([
     {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
             {
                 path : '/subscription/payment/:membership',
                 element : <Payment></Payment>
+            },
+            {
+                path : '/upcoming-meals',
+                element : <UpcomingMeals></UpcomingMeals>
             }
            
         ],

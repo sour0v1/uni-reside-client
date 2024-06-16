@@ -3,6 +3,7 @@ import { useState } from 'react';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { IoSearch } from 'react-icons/io5';
+import Heading from '../../components/Heading';
 
 const ServeMeals = () => {
     const axiosSecure = useAxiosSecure();
@@ -41,6 +42,7 @@ const ServeMeals = () => {
     }
     return (
         <div>
+            <Heading title={'Serve Meals'}></Heading>
             <div className="overflow-x-auto px-6 font-roboto">
                 <div className='flex justify-center items-center relative w-full text-center border'>
                     <div className='lg:w-2/3 relative'>

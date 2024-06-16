@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../provider/AuthProvider';
 import { IoSearch } from 'react-icons/io5';
+import Heading from '../../components/Heading';
 
 const ManageUser = () => {
     const { user } = useContext(AuthContext);
@@ -66,6 +67,7 @@ const ManageUser = () => {
     }
     return (
         <div>
+            <Heading title={'Manage Users'}></Heading>
             <div className="overflow-x-auto px-6 font-roboto">
                 <div className='flex justify-center items-center relative w-full text-center border'>
                     <div className='lg:w-2/3 relative'>

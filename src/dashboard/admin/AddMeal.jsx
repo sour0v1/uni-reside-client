@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
+import Heading from "../../components/Heading";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
@@ -46,6 +47,7 @@ const AddMeal = () => {
     // console.log(watch("example"));
     return (
         <div className="font-roboto lg:px-0">
+            <Heading title={'Add Meal'}></Heading>
             <form onSubmit={handleSubmit(onSubmit)} className="px-6 lg:grid lg:grid-cols-2 lg:gap-6 flex flex-col gap-6 lg:flex-none">
                 <div className="flex flex-col gap-2">
                     <label htmlFor="">Meal Title</label>

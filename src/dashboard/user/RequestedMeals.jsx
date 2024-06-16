@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../provider/AuthProvider';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import Heading from '../../components/Heading';
 
 const RequestedMeals = () => {
     const { user } = useContext(AuthContext);
@@ -17,6 +18,7 @@ const RequestedMeals = () => {
     console.log(meals);
     return (
         <div>
+            <Heading title={'Requested Meals'}></Heading>
             <div className="overflow-x-auto px-6 font-roboto">
                 <table className="table">
                     {/* head */}

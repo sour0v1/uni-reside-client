@@ -3,6 +3,7 @@ import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { MdDelete } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
+import Heading from '../../components/Heading';
 
 const Reviews = () => {
     const navigate = useNavigate();
@@ -20,6 +21,7 @@ const Reviews = () => {
     }
     return (
         <div>
+            <Heading title={'Reviews'}></Heading>
             <div className="overflow-x-auto px-6 font-roboto">
                 <table className="table">
                     {/* head */}

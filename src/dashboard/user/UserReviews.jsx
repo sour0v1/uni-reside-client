@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../../provider/AuthProvider';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { MdDelete } from 'react-icons/md';
+import Heading from '../../components/Heading';
 
 const UserReviews = () => {
     const { user } = useContext(AuthContext);
@@ -23,6 +24,7 @@ const UserReviews = () => {
     console.log(reviews);
     return (
         <div>
+            <Heading title={'Reviews'}></Heading>
             <div className="overflow-x-auto px-6 font-roboto">
                 <table className="table">
                     {/* head */}

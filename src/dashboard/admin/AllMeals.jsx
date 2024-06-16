@@ -3,6 +3,7 @@ import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { MdDelete } from 'react-icons/md';
+import Heading from '../../components/Heading';
 
 // TODO : implement update and delete
 const AllMeals = () => {
@@ -40,6 +41,7 @@ const AllMeals = () => {
     }
     return (
         <div>
+            <Heading title={'Meals'}></Heading>
             <div className="overflow-x-auto px-6 font-roboto">
                 <div className='w-full text-end'>
                     <select onChange={handleSort} className="bg-gray-200 py-3 px-2 border-2 border-opacity-80 " name="" id="">

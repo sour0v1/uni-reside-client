@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { AuthContext } from '../../provider/AuthProvider';
+import Heading from '../../components/Heading';
 
 const PaymentHistory = () => {
     const {user} = useContext(AuthContext);
@@ -17,7 +18,7 @@ const PaymentHistory = () => {
     console.log(payments);
     return (
         <div className='px-6'>
-            <h1 className='text-2xl mb-6 text-center'>Payment history</h1>
+            <Heading title={'Payment History'}></Heading>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}

@@ -57,7 +57,7 @@ const Dashboard = () => {
                             <span><PiChefHat /></span>
                             <span>Serve Meals</span>
                         </NavLink>
-                        <NavLink to={'upcoming-meals'} className={'flex justify-start items-center gap-2'}>
+                        <NavLink to={'admin/upcoming-meals'} className={'flex justify-start items-center gap-2'}>
                             <span><GiMeal /></span>
                             <span>Upcoming Meals</span>
                         </NavLink>
@@ -68,7 +68,7 @@ const Dashboard = () => {
                         </NavLink>
                     </div> :
                     <div id='routes' className='flex flex-col py-6 lg:col-span-3 px-6 gap-6 bg-slate-50 shadow'>
-                        <NavLink to={''} className={'flex justify-start items-center gap-2'}>
+                        <NavLink to={'user/user-profile'} className={'flex justify-start items-center gap-2'}>
                             <span><CiUser /></span>
                             <span>My Profile</span>
                         </NavLink>
