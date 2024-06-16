@@ -42,7 +42,7 @@ const Reviews = () => {
                                 <td>{review?.likes}</td>
                                 <td>{review?.review}</td>
                                 <td><button className='btn text-xl'><MdDelete /></button></td>
-                                <td className='btn my-2'><button onClick={() => handleNavigate(review?.mealId)}>View Meal</button></td>
+                                <td  onClick={() => handleNavigate(review?.mealId)} className='btn my-2'><button>View Meal</button></td>
                             </tr>)
                         }
                     </tbody>

@@ -45,7 +45,7 @@ const Dashboard = () => {
                             <span><GiMeal /></span>
                             <span>Add Meal</span>
                         </NavLink>
-                        <NavLink to={'all-meals'} className={'flex justify-start items-center gap-2'}>
+                        <NavLink to={'admin/all-meals'} className={'flex justify-start items-center gap-2'}>
                             <span><GiHotMeal /></span>
                             <span>All Meals</span>
                         </NavLink>
