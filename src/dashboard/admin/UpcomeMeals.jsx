@@ -55,6 +55,11 @@ const UpcomeMeals = () => {
         const res = await axiosSecure.post('/upcoming-meal', meals);
         console.log(res.data);
         if(res.data.insertedId){
+            Swal.fire({
+                title: "Success",
+                text: "Meal Added Successfully!",
+                icon: "success"
+              });
             refetch();
         }
         // console.log(meals)
@@ -89,11 +94,11 @@ const UpcomeMeals = () => {
                             <form onSubmit={handleSubmit(onSubmit)} className="px-6 lg:grid lg:grid-cols-2 lg:gap-6 flex flex-col gap-6 lg:flex-none">
                                 <div className="flex flex-col gap-2">
                                     <label htmlFor="">Meal Title</label>
-                                    <input {...register('title')} className="py-1 px-3 bg-gray-200 outline-none" type="text" />
+                                    <input required {...register('title')} className="py-1 px-3 bg-gray-200 outline-none" type="text" />
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <label htmlFor="">Image</label>
-                                    <input {...register('image')} className="py-1 px-3 bg-gray-200 outline-none" type="file" />
+                                    <input required {...register('image')} className="py-1 px-3 bg-gray-200 outline-none" type="file" />
                                 </div>
                                 <div className="flex flex-col gap-2 lg:col-span-2">
                                     <label htmlFor="">Ingredients</label>
@@ -127,7 +132,7 @@ const UpcomeMeals = () => {
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <label htmlFor="">Likes</label>
-                                    <input {...register('likes')} className="py-1 px-3 bg-gray-200 outline-none" type="number" />
+                                    <input required {...register('likes')} className="py-1 px-3 bg-gray-200 outline-none" type="number" />
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <label htmlFor="">Reviews</label>
