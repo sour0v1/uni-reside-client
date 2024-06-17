@@ -19,6 +19,7 @@ import AllMeals from "../dashboard/admin/AllMeals";
 import ServeMeals from "../dashboard/admin/ServeMeals";
 import UpcomingMeals from "../pages/upcomingMeals/UpcomingMeals";
 import UpcomeMeals from "../dashboard/admin/UpcomeMeals";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -47,7 +48,7 @@ const router = createBrowserRouter([
             },
             {
                 path : '/subscription/payment/:membership',
-                element : <Payment></Payment>
+                element : <PrivateRoute><Payment></Payment></PrivateRoute>
             },
             {
                 path : '/upcoming-meals',
@@ -59,7 +60,7 @@ const router = createBrowserRouter([
     // dashboard
     {
         path: '/dashboard',
-        element: <Dashboard></Dashboard>,
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
             // admin routes
             {

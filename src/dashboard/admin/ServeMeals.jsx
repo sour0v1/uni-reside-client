@@ -4,6 +4,7 @@ import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { IoSearch } from 'react-icons/io5';
 import Heading from '../../components/Heading';
+import Swal from 'sweetalert2';
 
 const ServeMeals = () => {
     const axiosSecure = useAxiosSecure();
@@ -21,6 +22,11 @@ const ServeMeals = () => {
         const res = await axiosSecure.put(`/update-status?id=${id}&email=${email}`)
         console.log(res.data);
         if (res.data.modifiedCount) {
+            Swal.fire({
+                title: "Success",
+                text: "Meal delivered",
+                icon: "success"
+            });
             refetch();
         }
 
@@ -72,7 +78,7 @@ const ServeMeals = () => {
                                 <td>{meal?.userName}</td>
                                 <td className={`${meal?.status === 'delivered' ? 'text-green-600' : 'text-orange-600'}`}>{meal?.status}</td>
                                 {
-                                    meal?.status === 'pending' && <td onClick={() => handleStatus(meal?.mealId, meal?.userEmail)} className='btn my-3 ml-3'>Serve</td> 
+                                    meal?.status === 'pending' && <td onClick={() => handleStatus(meal?.mealId, meal?.userEmail)} className='btn my-3 ml-3'>Serve</td>
                                 }
                             </tr>)
                         }

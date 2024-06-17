@@ -6,6 +6,7 @@ import { AiOutlineLike } from 'react-icons/ai';
 import { AuthContext } from '../../provider/AuthProvider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Swal from 'sweetalert2';
 
 const MealDetails = () => {
     const { user } = useContext(AuthContext);
@@ -35,9 +36,19 @@ const MealDetails = () => {
     // handle like
     const handleLike = async (id) => {
         console.log(id);
-        const res = await axiosSecure.post(`/like?mealId=${id}&userEmail=${user?.email}`);
-        toast(res.data.message);
-        refetch();
+        if (user) {
+            const res = await axiosSecure.post(`/like?mealId=${id}&userEmail=${user?.email}`);
+            toast(res.data.message);
+            refetch();
+        }
+        else {
+            Swal.fire({
+                title: "Oops",
+                text: "Log in required",
+                icon: "question"
+            });
+        }
+
     }
     // handle request
     const handleRequest = async (id, title, likes, reviews) => {
@@ -45,8 +56,17 @@ const MealDetails = () => {
         const info = {
             title, likes, reviews, userName: user?.displayName, userEmail: user?.email, status: 'pending'
         }
-        const res = await axiosSecure.post(`/request?mealId=${id}&userEmail=${user?.email}`, info);
-        toast(res.data.message);
+        if (user) {
+            const res = await axiosSecure.post(`/request?mealId=${id}&userEmail=${user?.email}`, info);
+            toast(res.data.message);
+        }
+        else{
+            Swal.fire({
+                title: "Oops",
+                text: "Log in required",
+                icon: "question"
+            });
+        }
     }
     // post review
     const post = document.getElementById('review');
@@ -67,9 +87,9 @@ const MealDetails = () => {
             toast('Posted Successfully!');
         }
     }
-    const handleChange = (event) =>{
-        if(event.target.value){
-           return setCount(false);
+    const handleChange = (event) => {
+        if (event.target.value) {
+            return setCount(false);
         }
         return setCount(true);
     }
@@ -79,9 +99,9 @@ const MealDetails = () => {
     }
     return (
         <>
-        <div className='pt-24'>
+            <div className='pt-24'>
 
-        </div>
+            </div>
             <div className='max-w-5xl mx-auto font-roboto space-y-3 shadow-lg mb-9 p-6'>
 
                 <img className='lg:h-[500px] w-full' src={meal?.image} alt="meal-food" />
@@ -99,7 +119,7 @@ const MealDetails = () => {
                 <p><span className='font-medium'>Review : </span>{review?.length || 0}</p>
                 <textarea onChange={handleChange} className='w-full bg-gray-100 px-3 py-2' placeholder='Post a review' id="review" cols={3} rows={3}></textarea>
                 <div className='w-full flex justify-end'>
-                    <button onClick={handleReview} disabled ={count} className={`py-2 px-4 text-white ${count ? 'bg-[#373A40]' : 'bg-[#0C0C0C]'}`}>Post</button>
+                    <button onClick={handleReview} disabled={count} className={`py-2 px-4 text-white ${count ? 'bg-[#373A40]' : 'bg-[#0C0C0C]'}`}>Post</button>
                 </div>
                 <ToastContainer></ToastContainer>
             </div>

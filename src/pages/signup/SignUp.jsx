@@ -3,12 +3,13 @@ import { useForm } from 'react-hook-form';
 import { FaGithub, FaRegEyeSlash } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { IoEyeOutline } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 import axios from 'axios';
 import { updateProfile } from 'firebase/auth';
 import auth from '../../firebase/firebase.config';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
+import Swal from 'sweetalert2';
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
@@ -19,9 +20,10 @@ const SignUp = () => {
     const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
     const [closed, setClosed] = useState(false);
     const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate();
     const saveUser = async (name, email, image) => {
         const userInfo = {
-            name, email, userPhoto : image, badge: 'bronze', role : 'user'
+            name, email, userPhoto: image, badge: 'bronze', role: 'user'
         }
         const res = await axiosPublic.post('/create-user', userInfo);
         console.log(res.data);
@@ -57,6 +59,13 @@ const SignUp = () => {
                             console.log(result.user);
                             saveUser(result?.user?.displayName, result?.user?.email, result?.user?.photoURL
                             )
+                            Swal.fire({
+                                title: "Success",
+                                text: "Signed up Successfully!",
+                                icon: "success"
+                            });
+                            setLoading(false);
+                            navigate('/')
                         })
                         .catch(error => {
                             console.log(error);
@@ -75,6 +84,15 @@ const SignUp = () => {
         createUserByGoogle()
             .then(result => {
                 console.log(result.user);
+                saveUser(result?.user?.displayName, result?.user?.email, result?.user?.photoURL
+                )
+                Swal.fire({
+                    title: "Success",
+                    text: "Signed up Successfully!",
+                    icon: "success"
+                });
+                setLoading(false);
+                navigate('/')
             })
             .catch(error => {
                 console.log(error);
@@ -85,6 +103,15 @@ const SignUp = () => {
         createUserByGithub()
             .then(result => {
                 console.log(result.user);
+                saveUser(result?.user?.displayName, result?.user?.email, result?.user?.photoURL
+                )
+                Swal.fire({
+                    title: "Success",
+                    text: "Signed up Successfully!",
+                    icon: "success"
+                });
+                setLoading(false);
+                navigate('/')
             })
             .catch(error => {
                 console.log(error);

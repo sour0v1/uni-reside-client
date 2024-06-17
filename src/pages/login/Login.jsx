@@ -4,12 +4,15 @@ import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../../provider/AuthProvider';
 import { useForm } from 'react-hook-form';
 import { IoEyeOutline } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const { signInUserByEmail, createUserByGithub, setLoading, loading, createUserByGoogle } = useContext(AuthContext);
     const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
     const [closed, setClosed] = useState(false);
     const [signInError, setSignInError] = useState(null);
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         setLoading(true);
@@ -21,16 +24,22 @@ const Login = () => {
             .then(result => {
                 // console.log(result.user);
                 console.log('sign in successfully');
+                Swal.fire({
+                    title: "Success",
+                    text: "Logged in Successfully!",
+                    icon: "success"
+                });
                 setLoading(false);
                 setSignInError(null);
                 reset();
+                navigate('/');
             })
             .catch(error => {
                 console.log(error.message);
                 // setSignInError(error.message);
                 setLoading(false)
-                if(error.message.includes('auth/invalid-credential')){
-                   return setSignInError('Incorrect email or password');
+                if (error.message.includes('auth/invalid-credential')) {
+                    return setSignInError('Incorrect email or password');
                 }
                 return setSignInError('Something went wrong!');
             })
@@ -41,16 +50,30 @@ const Login = () => {
         createUserByGoogle()
             .then(result => {
                 console.log(result.user);
+                Swal.fire({
+                    title: "Success",
+                    text: "Logged in Successfully!",
+                    icon: "success"
+                });
+                setLoading(false);
+                navigate('/')
             })
             .catch(error => {
                 console.log(error);
-                
+
             })
     }
     const handleGithubSingIn = () => {
         createUserByGithub()
             .then(result => {
                 console.log(result.user);
+                Swal.fire({
+                    title: "Success",
+                    text: "Logged in Successfully!",
+                    icon: "success"
+                });
+                setLoading(false);
+                navigate('/')
             })
             .catch(error => {
                 console.log(error);
@@ -70,7 +93,7 @@ const Login = () => {
                 </div>
                 <div className='flex flex-col gap-2 relative'>
                     <label htmlFor="password">Password</label>
-                    <input {...register('password', { required: true })} className='px-3 py-2 bg-gray-100' id='password' type={`${!closed ? 'password' : 'text'}`}placeholder='Password' />
+                    <input {...register('password', { required: true })} className='px-3 py-2 bg-gray-100' id='password' type={`${!closed ? 'password' : 'text'}`} placeholder='Password' />
                     <span onClick={() => setClosed(!closed)} className='absolute right-2 top-11'>{!closed ? <FaRegEyeSlash /> : <IoEyeOutline />}</span>
                     {errors.password && <span className='text-red-500'>This field is required</span>}
                 </div>
