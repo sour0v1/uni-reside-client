@@ -18,6 +18,7 @@ import Reviews from "../dashboard/admin/Reviews";
 import AllMeals from "../dashboard/admin/AllMeals";
 import ServeMeals from "../dashboard/admin/ServeMeals";
 import UpcomingMeals from "../pages/upcomingMeals/UpcomingMeals";
+import UpcomeMeals from "../dashboard/admin/UpcomeMeals";
 
 const router = createBrowserRouter([
     {
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
             {
                 path : 'admin/serve-meals',
                 element : <ServeMeals></ServeMeals>
+            },
+            {
+                path : 'admin/upcoming-meals',
+                element : <UpcomeMeals></UpcomeMeals>
             },
             // user routes
             {
