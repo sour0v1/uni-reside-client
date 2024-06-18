@@ -42,7 +42,7 @@ const UpcomeMeals = () => {
         const description = data.description;
         const rating = data.rating;
         const postTime = data.postTime;
-        const likes = data.likes;
+        const likes = Number(data.likes);
         const reviews = data.reviews;
         const adminName = data.adminName;
         const adminEmail = data.email;
