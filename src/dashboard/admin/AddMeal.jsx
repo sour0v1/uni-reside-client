@@ -27,17 +27,18 @@ const AddMeal = () => {
         const title = data.title;
         const ingredients = data.ingredients;
         const category = data.category;
-        const price = data.price;
+        const price = Number(data.price);
         const description = data.description;
         const rating = data.rating;
         const postTime = data.postTime;
+        const likes = Number(data.likes);
         const reviews = data.reviews;
         const adminName = data.adminName;
         const adminEmail = data.email;
         const image = imageRes.data.data.display_url;
         // console.log(image)
         const meals = {
-            title, ingredients, category, price, description, rating, postTime, reviews, adminName, adminEmail, image
+            title, ingredients, category, price, description, rating, postTime, likes, reviews, adminName, adminEmail, image
         }
 
         const res = await axiosSecure.post('/add-meals', meals);
