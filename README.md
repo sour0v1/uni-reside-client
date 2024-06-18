@@ -1,8 +1,16 @@
-# React + Vite
+## [UniReside]('url')
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+** Username - abc**
+** Password - abc**
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Key features of UniReside ###
+- Discover daily meals with detailed descriptions and category
+- Stay informed with upcoming meal
+- Easily choose and subscribe to meal plans tailored to your needs
+- Experience secure and seamless online payment processing
+- Manage your meal plans, reviews, requested meals and view transaction history
+- Efficiently oversee meal planning, manage subscriptions, and track inventory
+- Enjoy a seamless browsing experience on any device, whether desktop, tablet, or smartphone
+- Access detailed allergen information and dietary guidelines for each meal
+-  Allow users to submit meal requests 
+- Share your meal experiences and provide likes and reviews.
