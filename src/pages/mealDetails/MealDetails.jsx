@@ -33,6 +33,14 @@ const MealDetails = () => {
         enabled: !!id
     })
     console.log(review);
+    const { data: userBadge } = useQuery({
+        queryKey: ['badge'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/user-badge?userEmail=${user?.email}`)
+            return res.data.badge;
+        },
+        enabled: !!user?.email
+    })
     // handle like
     const handleLike = async (id) => {
         console.log(id);
@@ -57,16 +65,27 @@ const MealDetails = () => {
             title, likes, reviews, userName: user?.displayName, userEmail: user?.email, status: 'pending'
         }
         if (user) {
-            const res = await axiosSecure.post(`/request?mealId=${id}&userEmail=${user?.email}`, info);
-            toast(res.data.message);
+            if (userBadge === 'silver' || userBadge === 'gold' || userBadge === 'platinum') {
+                const res = await axiosSecure.post(`/request?mealId=${id}&userEmail=${user?.email}`, info);
+                toast(res.data.message);
+                // refetch();
+            }
+            else {
+                Swal.fire({
+                    title: "Oops",
+                    text: "Subscribe a package to request",
+                    icon: "question"
+                });
+            }
         }
         else {
             Swal.fire({
                 title: "Oops",
-                text: "Log in required",
+                text: "Require log in",
                 icon: "question"
             });
         }
+
     }
     // post review
     const post = document.getElementById('review');
@@ -90,8 +109,8 @@ const MealDetails = () => {
         }
         else {
             Swal.fire({
-                title: "Oops",
-                text: "Log in required",
+                title: "Sorry",
+                text: "Please log in",
                 icon: "question"
             });
         }

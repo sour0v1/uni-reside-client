@@ -1,7 +1,7 @@
 ## [UniReside]('url')
 
-** Username - abc**
-** Password - abc**
+**Username - abc**
+**Password - abc**
 
 ### Key features of UniReside ###
 - Discover daily meals with detailed descriptions and category
