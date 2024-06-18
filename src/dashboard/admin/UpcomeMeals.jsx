@@ -54,12 +54,12 @@ const UpcomeMeals = () => {
 
         const res = await axiosSecure.post('/upcoming-meal', meals);
         console.log(res.data);
-        if(res.data.insertedId){
+        if (res.data.insertedId) {
             Swal.fire({
                 title: "Success",
                 text: "Meal Added Successfully!",
                 icon: "success"
-              });
+            });
             refetch();
         }
         // console.log(meals)
@@ -69,12 +69,12 @@ const UpcomeMeals = () => {
     const handlePublish = async (id) => {
         const res = await axiosSecure.post(`/up-to-add?id=${id}`)
         console.log(res.data);
-        if(res.data.insertedId){
+        if (res.data.insertedId) {
             Swal.fire({
                 title: "Success",
                 text: "Meal published Successfully!",
                 icon: "success"
-              });
+            });
             refetch();
         }
     }
@@ -154,30 +154,36 @@ const UpcomeMeals = () => {
                         <label className="modal-backdrop" htmlFor="my_modal_7">Close</label>
                     </div>
                 </div>
-                <table className="table">
-                    {/* head */}
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Title</th>
-                            <th>Image</th>
-                            <th>Likes</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            sortedUpMeals?.map((meal, idx) => <tr key={meal._id}>
-                                <th>{idx + 1}</th>
-                                <td>{meal?.title}</td>
-                                <td><img className='w-16' src={meal?.image} alt="food" /></td>
-                                <td>{meal?.likes}</td>
-                                <td onClick={() => handlePublish(meal?._id)}><button className='btn'>Publish</button></td>
-                                
-                            </tr>)
-                        }
-                    </tbody>
-                </table>
+                {
+                    sortedUpMeals.length > 0 ?
+                        <table className="table">
+                            {/* head */}
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Title</th>
+                                    <th>Image</th>
+                                    <th>Likes</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    sortedUpMeals?.map((meal, idx) => <tr key={meal._id}>
+                                        <th>{idx + 1}</th>
+                                        <td>{meal?.title}</td>
+                                        <td><img className='w-16' src={meal?.image} alt="food" /></td>
+                                        <td>{meal?.likes}</td>
+                                        <td onClick={() => handlePublish(meal?._id)}><button className='btn'>Publish</button></td>
+
+                                    </tr>)
+                                }
+                            </tbody>
+                        </table> :
+                        <div className='w-full text-center'>
+                            <h1 className='text-2xl'>Empty</h1>
+                        </div>
+                }
             </div>
         </div>
     );
