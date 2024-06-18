@@ -5,6 +5,7 @@ import MealCard from "../../components/MealCard";
 import { useEffect, useState } from "react";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Link } from "react-router-dom";
+import { MdSort } from "react-icons/md";
 
 
 const Meals = () => {
@@ -34,7 +35,7 @@ const Meals = () => {
         setSearchValue(searchQuery);
         console.log(searchQuery);
         const res = await axiosPublic.get(`/search-meals/${searchQuery}`)
-        console.log('err',res.data);
+        console.log('err', res.data);
         // setMeals(res.data);
         setMeals1(res.data);
 
@@ -55,6 +56,9 @@ const Meals = () => {
         }
 
     }
+    const handleFilter = () => {
+        setFilter(!filter);
+    }
     return (
         <InfiniteScroll
             dataLength={meals?.length} //This is important field to render the next data
@@ -68,6 +72,33 @@ const Meals = () => {
                     <input onChange={handleSearch} placeholder="meal name" className="py-2 px-3 w-full bg-gray-200 rounded-full outline-none" type="text" />
                     <span className="absolute text-xl right-3 top-2 opacity-90 "><IoSearchOutline /></span>
                 </div>
+                <div className="w-full flex justify-end my-3">
+                    <button onClick={handleFilter} className="btn flex justify-center items-center gap-2">
+                        <span className="text-xl"><MdSort /></span>
+                        <span>Sort Meal</span>
+                    </button>
+
+                </div>
+                {
+                    filter && <div className="flex justify-center items-center gap-6 mb-3">
+                        <div>
+                            <select className="py-3 px-3 border w-fit outline-none" onChange={handleCategoryFilter}>
+                                <option value="category">Filter By Category</option>
+                                <option value="breakfast">Breakfast</option>
+                                <option value="lunch">Lunch</option>
+                                <option value="dinner">Dinner</option>
+                            </select>
+                        </div>
+                        <div>
+                            <select className="py-3 px-3 border w-fit outline-none" onChange={handleCategoryFilter}>
+                                <option value="category" disabled>Filter By Price</option>
+                                <option value="breakfast">Breakfast</option>
+                                <option value="lunch">Lunch</option>
+                                <option value="dinner">Dinner</option>
+                            </select>
+                        </div>
+                    </div>
+                }
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {
                         (searchValue?.length ? meals1 : meals)?.map((meal, idx) => <MealCard key={idx} meal={meal}></MealCard>)
