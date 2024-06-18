@@ -4,7 +4,7 @@ import { HiOutlineMenu } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
 import { IoNotificationsOutline } from "react-icons/io5";
 import '../navbar/Navbar.css'
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from '../provider/AuthProvider';
 import { signOut } from 'firebase/auth';
 import auth from '../firebase/firebase.config';
@@ -15,6 +15,7 @@ import { useQuery } from '@tanstack/react-query';
 const Navbar = () => {
     const [open, setOpen] = useState(false);
     const [open1, setOpen1] = useState(false);
+    const navigate = useNavigate();
     console.log(open1)
     const { user } = useContext(AuthContext);
     // const user = false;
@@ -34,6 +35,7 @@ const Navbar = () => {
         signOut(auth)
             .then(() => {
                 console.log('sign out successfully');
+                navigate('/');
             })
             .catch(error => {
                 console.log(error);

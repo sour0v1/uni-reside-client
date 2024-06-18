@@ -19,7 +19,8 @@ const RequestedMeals = () => {
     return (
         <div>
             <Heading title={'Requested Meals'}></Heading>
-            <div className="overflow-x-auto px-6 font-roboto">
+            {
+                meals?.length > 0 ? <div className="overflow-x-auto px-6 font-roboto">
                 <table className="table">
                     {/* head */}
                     <thead>
@@ -46,7 +47,11 @@ const RequestedMeals = () => {
                         }
                     </tbody>
                 </table>
+            </div> : 
+            <div className='w-full text-center'>
+                <h1 className='text-2xl'>You have not requested any food yet.</h1>
             </div>
+            }
         </div>
     );
 };

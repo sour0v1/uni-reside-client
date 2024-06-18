@@ -25,36 +25,42 @@ const UserReviews = () => {
     return (
         <div>
             <Heading title={'Reviews'}></Heading>
-            <div className="overflow-x-auto px-6 font-roboto">
-                <table className="table">
-                    {/* head */}
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Title</th>
-                            <th>Likes</th>
-                            <th>Review</th>
-                            <th>Action</th>
-                            <th>Action</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* row 1 */}
-                        {
-                            reviews?.map((meal, idx) => <tr key={meal._id}>
-                                <th>{idx + 1}</th>
-                                <td>{meal?.title}</td>
-                                <td>{meal?.likes}</td>
-                                <td>{meal?.review}</td>
-                                <td><button className='underline'>Edit</button></td>
-                                <td><button className='btn text-xl'><MdDelete /></button></td>
-                                <td onClick={() => handleNavigate(meal?.mealId)} className='btn my-2'><button>View Meal</button></td>
-                            </tr>)
-                        }
-                    </tbody>
-                </table>
-            </div>
+            {
+                reviews?.length > 0 ?
+                    <div className="overflow-x-auto px-6 font-roboto">
+                        <table className="table">
+                            {/* head */}
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Title</th>
+                                    <th>Likes</th>
+                                    <th>Review</th>
+                                    <th>Action</th>
+                                    <th>Action</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {/* row 1 */}
+                                {
+                                    reviews?.map((meal, idx) => <tr key={meal._id}>
+                                        <th>{idx + 1}</th>
+                                        <td>{meal?.title}</td>
+                                        <td>{meal?.likes}</td>
+                                        <td>{meal?.review}</td>
+                                        <td><button className='underline'>Edit</button></td>
+                                        <td><button className='btn text-xl'><MdDelete /></button></td>
+                                        <td onClick={() => handleNavigate(meal?.mealId)} className='btn my-2'><button>View Meal</button></td>
+                                    </tr>)
+                                }
+                            </tbody>
+                        </table>
+                    </div> :
+                    <div className='w-full text-center'>
+                        <h1 className='text-2xl'>No Reviews Posted.</h1>
+                    </div>
+            }
         </div>
     );
 };

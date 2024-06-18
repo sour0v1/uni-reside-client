@@ -60,7 +60,7 @@ const MealDetails = () => {
             const res = await axiosSecure.post(`/request?mealId=${id}&userEmail=${user?.email}`, info);
             toast(res.data.message);
         }
-        else{
+        else {
             Swal.fire({
                 title: "Oops",
                 text: "Log in required",
@@ -80,11 +80,20 @@ const MealDetails = () => {
             userEmail: user?.email
 
         }
-        const res = await axiosSecure.post('/review', reviewInfo);
-        console.log(res.data);
-        if (res.data.insertedId) {
-            reload();
-            toast('Posted Successfully!');
+        if (user) {
+            const res = await axiosSecure.post('/review', reviewInfo);
+            console.log(res.data);
+            if (res.data.insertedId) {
+                reload();
+                toast('Posted Successfully!');
+            }
+        }
+        else {
+            Swal.fire({
+                title: "Oops",
+                text: "Log in required",
+                icon: "question"
+            });
         }
     }
     const handleChange = (event) => {
