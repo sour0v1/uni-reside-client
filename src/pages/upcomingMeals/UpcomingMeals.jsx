@@ -23,7 +23,7 @@ const UpcomingMeals = () => {
             return res.data;
         },
         enabled: !!pageNo,
-        refetchInterval : 500
+        refetchInterval: 500
     })
     console.log('hhhh -', upcomingMeals)
 
@@ -41,7 +41,7 @@ const UpcomingMeals = () => {
     })
     console.log(userBadge);
 
-    const handleLike = async (id) => {
+    const handleLike = async (id, likes) => {
         console.log(id);
         if (userBadge === 'silver' || userBadge === 'gold' || userBadge === 'platinum') {
             const res = await axiosSecure.post(`/up-like?id=${id}&userEmail=${user?.email}`);
@@ -60,31 +60,37 @@ const UpcomingMeals = () => {
     return (
         <div className='pt-24 max-w-5xl mx-auto font-roboto mb-9'>
             <h1 className='w-full text-center text-2xl font-bold mb-9 mt-3'>Upcoming Meals</h1>
-            <div className='grid grid-cols-3 gap-6'>
-                {
-                    upcomingMeals?.result?.map(meal => <div key={meal?._id} className=" bg-base-100 shadow-xl">
-                        <figure><img src={meal?.image} alt="Shoes" /></figure>
-                        <div className="card-body">
-                            <div className='flex justify-between items-center'>
-                                <h2 className="card-title">
-                                    {meal?.title}
-                                </h2>
-                                <button onClick={() => handleLike(meal?._id)} className='btn text-xl'><AiOutlineLike /><span>{meal?.likes}</span></button>
-                            </div>
-                            <div>
-                                <p>Category : <span>{meal?.category}</span></p>
-                                <p>Price : $<span>{meal?.price}</span></p>
-                            </div>
-                        </div>
-                    </div>)
-                }
-            </div>
+            {
+                upcomingMeals?.result.length > 0 ?
+                    <div className='grid grid-cols-3 gap-6'>
+                        {
+                            upcomingMeals?.result?.map(meal => <div key={meal?._id} className=" bg-base-100 shadow-xl">
+                                <figure><img src={meal?.image} alt="Shoes" /></figure>
+                                <div className="card-body">
+                                    <div className='flex justify-between items-center'>
+                                        <h2 className="card-title">
+                                            {meal?.title}
+                                        </h2>
+                                        <button onClick={() => handleLike(meal?._id, meal?.likes)} className='btn text-xl'><AiOutlineLike /><span>{meal?.likes}</span></button>
+                                    </div>
+                                    <div>
+                                        <p>Category : <span>{meal?.category}</span></p>
+                                        <p>Price : $<span>{meal?.price}</span></p>
+                                    </div>
+                                </div>
+                            </div>)
+                        }
+                    </div> :
+                    <div className='w-full text-center'>
+                        <h1 className='text-2xl font-bold'>Empty</h1>
+                    </div>
+            }
             <div className='w-full flex justify-center items-center gap-9 my-6'>
-                <button onClick={() => handlePageChange(pageNo - 1)} disabled = {pageNo === 1} className='btn flex justify-center items-center gap-2'>
+                <button onClick={() => handlePageChange(pageNo - 1)} disabled={pageNo === 1 || upcomingMeals?.totalPage === 0} className='btn flex justify-center items-center gap-2'>
                     <span className='text-xl'><GrPrevious /></span>
                     <span>Prev</span>
                 </button>
-                <button onClick={() => handlePageChange(pageNo + 1)} disabled = {pageNo === upcomingMeals?.totalPage} className='btn flex justify-center items-center gap-2'>
+                <button onClick={() => handlePageChange(pageNo + 1)} disabled={pageNo === upcomingMeals?.totalPage || upcomingMeals?.totalPage === 0} className='btn flex justify-center items-center gap-2'>
                     <span>Next</span>
                     <span className='text-xl'><GrNext /></span>
                 </button>

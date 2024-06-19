@@ -73,7 +73,7 @@ const Meals = () => {
             hasMore={hasMore}
             loader={<h4 className="text-center">Loading...</h4>}
         >
-            <div className="max-w-5xl mx-auto font-roboto pt-24 mb-9">
+            <div className="max-w-5xl mx-auto font-roboto pt-24 mb-9 px-6 lg:px-0">
                 <h1 className="w-full text-center text-2xl font-bold">All Meals</h1>
                 <div className="w-2/3 mx-auto my-6 text-center relative">
                     <input onChange={handleSearch} placeholder="meal name" className="py-2 px-3 w-full bg-gray-200 rounded-full outline-none" type="text" />

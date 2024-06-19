@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { MdDelete } from 'react-icons/md';
 import Heading from '../../components/Heading';
 import Swal from 'sweetalert2';
-import axios from 'axios';
 
 // TODO : implement update and delete
 const AllMeals = () => {
@@ -69,47 +68,6 @@ const AllMeals = () => {
 
     }
     // form update
-    const onSubmit = async (data) => {
-        console.log(data);
-
-        const imageFile = { image: data.image[0] }
-
-        const imageRes = await axios.post(image_hosting_api, imageFile, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        })
-        // console.log(res.data);
-        const title = data.title;
-        const ingredients = data.ingredients;
-        const category = data.category;
-        const price = data.price;
-        const description = data.description;
-        const rating = data.rating;
-        const postTime = data.postTime;
-        const likes = Number(data.likes);
-        const reviews = data.reviews;
-        const adminName = data.adminName;
-        const adminEmail = data.email;
-        const image = imageRes.data.data.display_url;
-        // console.log(image)
-        const meals = {
-            title, ingredients, category, price, description, rating, postTime, likes, reviews, adminName, adminEmail, image
-        }
-
-        const res = await axiosSecure.post('/upcoming-meal', meals);
-        console.log(res.data);
-        if (res.data.insertedId) {
-            Swal.fire({
-                title: "Success",
-                text: "Meal Added Successfully!",
-                icon: "success"
-            });
-            refetch();
-        }
-        // console.log(meals)
-
-    }
     const handleUpdateNavigate = (id) => {
         navigate(`update-meal/${id}`)
     }

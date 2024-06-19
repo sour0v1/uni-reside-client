@@ -43,16 +43,28 @@ const UserReviews = () => {
         }
     }
     const handleDelete = async (id) => {
-        const res = await axiosSecure.delete(`/delete-review?id=${id}`)
-        console.log(res.data);
-        if (res.data.deletedCount) {
-            Swal.fire({
-                title: "Success!",
-                text: "Review deleted successfully!.",
-                icon: "success"
-            });
-            refetch();
-        }
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then( async (result) => {
+            if (result.isConfirmed) {
+                const res = await axiosSecure.delete(`/delete-review?id=${id}`)
+                console.log(res.data);
+                if (res.data.deletedCount) {
+                    Swal.fire({
+                        title: "Success!",
+                        text: "Review deleted successfully!.",
+                        icon: "success"
+                    });
+                    refetch();
+                }
+            }
+        });
     }
     return (
         <div>
