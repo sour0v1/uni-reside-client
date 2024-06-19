@@ -155,7 +155,7 @@ const UpcomeMeals = () => {
                     </div>
                 </div>
                 {
-                    sortedUpMeals.length > 0 ?
+                    sortedUpMeals?.length > 0 ?
                         <table className="table">
                             {/* head */}
                             <thead>

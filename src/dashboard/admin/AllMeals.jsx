@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { MdDelete } from 'react-icons/md';
 import Heading from '../../components/Heading';
+import Swal from 'sweetalert2';
+import axios from 'axios';
 
 // TODO : implement update and delete
 const AllMeals = () => {
     const [sortedMeals, setSortedMeals] = useState([]);
     const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
-    const { data: allMeals } = useQuery({
+    const { data: allMeals, refetch } = useQuery({
         queryKey: ['allMeals'],
         queryFn: async () => {
             const res = await axiosSecure.get('/all-meals');
@@ -39,6 +41,79 @@ const AllMeals = () => {
     const handleNavigate = (id) => {
         navigate(`/meal/${id}`)
     }
+    const handleDelete = async (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const res = await axiosSecure.delete(`/delete-meal?id=${id}`)
+                console.log(res.data);
+                if (res.data.deletedCount) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your meal has been deleted.",
+                        icon: "success"
+                    });
+                    refetch();
+                }
+
+            }
+        });
+
+
+    }
+    // form update
+    const onSubmit = async (data) => {
+        console.log(data);
+
+        const imageFile = { image: data.image[0] }
+
+        const imageRes = await axios.post(image_hosting_api, imageFile, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        // console.log(res.data);
+        const title = data.title;
+        const ingredients = data.ingredients;
+        const category = data.category;
+        const price = data.price;
+        const description = data.description;
+        const rating = data.rating;
+        const postTime = data.postTime;
+        const likes = Number(data.likes);
+        const reviews = data.reviews;
+        const adminName = data.adminName;
+        const adminEmail = data.email;
+        const image = imageRes.data.data.display_url;
+        // console.log(image)
+        const meals = {
+            title, ingredients, category, price, description, rating, postTime, likes, reviews, adminName, adminEmail, image
+        }
+
+        const res = await axiosSecure.post('/upcoming-meal', meals);
+        console.log(res.data);
+        if (res.data.insertedId) {
+            Swal.fire({
+                title: "Success",
+                text: "Meal Added Successfully!",
+                icon: "success"
+            });
+            refetch();
+        }
+        // console.log(meals)
+
+    }
+    const handleUpdateNavigate = (id) => {
+        navigate(`update-meal/${id}`)
+    }
+
     return (
         <div>
             <Heading title={'Meals'}></Heading>
@@ -50,6 +125,7 @@ const AllMeals = () => {
                         <option value="reviews">Reviews</option>
                     </select>
                 </div>
+                
                 <table className="table">
                     {/* head */}
                     <thead>
@@ -73,8 +149,8 @@ const AllMeals = () => {
                                 <td>{meal?.likes}</td>
                                 <td>{meal?.reviews}</td>
                                 <td>{meal?.adminName}</td>
-                                <td className='btn my-2'>Update</td>
-                                <td><button className='btn text-xl'><MdDelete /></button></td>
+                                <td onClick={() => handleUpdateNavigate(meal?._id)} className='btn my-2'>Update</td>
+                                <td onClick={() => handleDelete(meal?._id)}><button className='btn text-xl'><MdDelete /></button></td>
                                 <td onClick={() => handleNavigate(meal?._id)} className='btn my-2'><button>View Meal</button></td>
                             </tr>)
                         }

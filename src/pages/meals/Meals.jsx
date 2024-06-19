@@ -13,7 +13,6 @@ const Meals = () => {
     const [meals, setMeals] = useState([]);
     const [meals1, setMeals1] = useState([]);
     const [searchValue, setSearchValue] = useState(null);
-    const [priceFilter, setPriceFilter] = useState([]);
     const [filter, setFilter] = useState(false);
     const [page, setPage] = useState(1)
     const [hasMore, setHasMore] = useState(true)
@@ -38,7 +37,7 @@ const Meals = () => {
         const res = await axiosPublic.get(`/search-meals/${searchQuery}`)
         console.log('err', res.data);
         // setMeals(res.data);
-        setMeals1(res.data);
+        setMeals(res.data);
 
     }
     // console.log(meals);
@@ -51,7 +50,7 @@ const Meals = () => {
             setMeals(res.data);
         }
         if (searchValue) {
-            const filterSearchValue = meals1.filter(value => filterValue === value.category);
+            const filterSearchValue = meals.filter(value => filterValue === value.category);
             console.log('ddd', filterSearchValue)
             setMeals(filterSearchValue);
         }
@@ -62,8 +61,7 @@ const Meals = () => {
         // console.log(filterValue);
         const res = await axiosPublic.get(`/filter-by-price?priceValue=${filterValue}`)
         console.log(res.data);
-        setPriceFilter(res.data);
-        setMeals1(res.data);
+        setMeals(res.data);
     }
     const handleFilter = () => {
         setFilter(!filter);
@@ -109,11 +107,17 @@ const Meals = () => {
                         </div>
                     </div>
                 }
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {
-                        (searchValue?.length || priceFilter ? meals1 : meals)?.map((meal, idx) => <MealCard key={idx} meal={meal}></MealCard>)
-                    }
-                </div>
+                {
+                    meals.length > 0 ?
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {
+                                (meals)?.map((meal, idx) => <MealCard key={idx} meal={meal}></MealCard>)
+                            }
+                        </div> :
+                        <div className="w-full text-center font-roboto">   
+                            <h2 className="text-2xl font-bold">No meals Found</h2>
+                        </div>
+                }
             </div>
 
         </InfiniteScroll>
