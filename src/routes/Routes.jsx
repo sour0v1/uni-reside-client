@@ -20,6 +20,7 @@ import ServeMeals from "../dashboard/admin/ServeMeals";
 import UpcomingMeals from "../pages/upcomingMeals/UpcomingMeals";
 import UpcomeMeals from "../dashboard/admin/UpcomeMeals";
 import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
     {
@@ -43,18 +44,18 @@ const router = createBrowserRouter([
                 element: <Meals></Meals>
             },
             {
-                path : '/meal/:id',
-                element : <MealDetails></MealDetails>
+                path: '/meal/:id',
+                element: <MealDetails></MealDetails>
             },
             {
-                path : '/subscription/payment/:membership',
-                element : <PrivateRoute><Payment></Payment></PrivateRoute>
+                path: '/subscription/payment/:membership',
+                element: <PrivateRoute><Payment></Payment></PrivateRoute>
             },
             {
-                path : '/upcoming-meals',
-                element : <UpcomingMeals></UpcomingMeals>
+                path: '/upcoming-meals',
+                element: <UpcomingMeals></UpcomingMeals>
             }
-           
+
         ],
     },
     // dashboard
@@ -64,51 +65,63 @@ const router = createBrowserRouter([
         children: [
             // admin routes
             {
-                path : 'admin/profile',
-                element : <AdminProfile></AdminProfile>
+                path: 'admin/profile',
+                element: <AdminProfile></AdminProfile>
             },
             {
                 path: 'admin/add-meal',
                 element: <AddMeal></AddMeal>
             },
             {
-                path : 'admin/manage-users',
-                element : <ManageUser></ManageUser>
+                path: 'admin/manage-users',
+                element: <AdminRoute>
+                    <PrivateRoute><ManageUser></ManageUser></PrivateRoute>
+                </AdminRoute>
             },
             {
-                path : 'admin/all-reviews',
-                element : <Reviews></Reviews>
+                path: 'admin/all-reviews',
+                element: <AdminRoute><PrivateRoute>
+                    <Reviews></Reviews>
+                </PrivateRoute></AdminRoute>
             },
             {
-                path : 'admin/all-meals',
-                element : <AllMeals></AllMeals>
+                path: 'admin/all-meals',
+                element: <AdminRoute><PrivateRoute>
+                    <AllMeals></AllMeals>
+                </PrivateRoute></AdminRoute>
             },
             {
-                path : 'admin/serve-meals',
-                element : <ServeMeals></ServeMeals>
+                path: 'admin/serve-meals',
+                element: <AdminRoute><PrivateRoute>
+                    <ServeMeals></ServeMeals>
+                </PrivateRoute></AdminRoute>
             },
             {
-                path : 'admin/upcoming-meals',
-                element : <UpcomeMeals></UpcomeMeals>
+                path: 'admin/upcoming-meals',
+                element: <AdminRoute><PrivateRoute>
+                    <UpcomeMeals></UpcomeMeals>
+                </PrivateRoute></AdminRoute>
             },
             // user routes
             {
-                path : 'user/user-profile',
-                element : <UserProfile></UserProfile>
+                path: 'user/user-profile',
+                element: <PrivateRoute>
+                    <UserProfile></UserProfile>
+                </PrivateRoute>
             },
             {
-                path : 'user/requested-meals',
-                element : <RequestedMeals></RequestedMeals>
+                path: 'user/requested-meals',
+                element: <PrivateRoute><RequestedMeals></RequestedMeals></PrivateRoute>
             },
             {
-                path : 'user/reviews',
-                element : <UserReviews></UserReviews>
+                path: 'user/reviews',
+                element: <PrivateRoute><UserReviews></UserReviews></PrivateRoute>
             },
             {
-                path : 'user/payment/history',
-                element : <PaymentHistory></PaymentHistory>
+                path: 'user/payment/history',
+                element: <PrivateRoute><PaymentHistory></PaymentHistory></PrivateRoute>
             }
-            
+
         ]
     }
 ])

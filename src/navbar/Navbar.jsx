@@ -11,10 +11,12 @@ import auth from '../firebase/firebase.config';
 import { RxCross1 } from 'react-icons/rx';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import useScroll from '../hooks/useScroll';
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
     const [open1, setOpen1] = useState(false);
+    const scrollDirection = useScroll();
     const navigate = useNavigate();
     console.log(open1)
     const { user } = useContext(AuthContext);
@@ -41,9 +43,10 @@ const Navbar = () => {
                 console.log(error);
             })
     }
+    console.log('boom', window.scrollY)
     return (
         <>
-            <div className={`font-roboto flex justify-between items-center lg:px-16 py-5 bg-[#373A40] bg-opacity-35 fixed z-10 w-full text-white ${!open ? 'px-6' : 'pr-6'}`}>
+            <div className={`font-roboto flex justify-between items-center lg:px-16 py-5 bg-[#373A40] bg-opacity-35 fixed z-10 w-full text-white ${!open ? 'px-6' : 'pr-6'} ${scrollDirection === 'down' ? '-translate-y-full transition-transform duration-300' : '-translate-y-0 transition-transform duration-300'}`}>
                 <div className='flex justify-center items-center gap-2'>
                     <h1 className='bg-white text-white bg-opacity-40 opacity-90 font-bold text-4xl w-9 h-9 flex justify-center items-center'>U</h1>
                     <h1 className="text-2xl font-semibold opacity-90">UniReside</h1>
