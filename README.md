@@ -1,9 +1,9 @@
-## [UniReside]('url')
+## [UniReside]('https://uni-reside.web.app/')
 
-#### Username - abc
-#### Password - abc
+#### Username - You
+#### Password - Pass123?
 
-#### Website Url - 
+#### Website Url - https://uni-reside.web.app/
 
 ### Key features of UniReside ###
 - Discover daily meals with detailed descriptions and category
