@@ -4,7 +4,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import auth from "../firebase/firebase.config";
 
 const axiosSecure = axios.create({
-    baseURL: 'https://uni-reside.web.app', withCredentials: true
+    baseURL: 'https://uni-reside-server.vercel.app', withCredentials: true
 })
 
 const useAxiosSecure = () => {
