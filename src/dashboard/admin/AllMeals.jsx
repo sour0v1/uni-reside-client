@@ -68,9 +68,6 @@ const AllMeals = () => {
 
     }
     // form update
-    const handleUpdateNavigate = (id) => {
-        navigate(`update-meal/${id}`)
-    }
 
     return (
         <div>
@@ -107,7 +104,7 @@ const AllMeals = () => {
                                 <td>{meal?.likes}</td>
                                 <td>{meal?.reviews}</td>
                                 <td>{meal?.adminName}</td>
-                                <td onClick={() => handleUpdateNavigate(meal?._id)} className='btn my-2'>Update</td>
+                                <td className='btn my-2'>Update</td>
                                 <td onClick={() => handleDelete(meal?._id)}><button className='btn text-xl'><MdDelete /></button></td>
                                 <td onClick={() => handleNavigate(meal?._id)} className='btn my-2'><button>View Meal</button></td>
                             </tr>)

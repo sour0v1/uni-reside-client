@@ -4,7 +4,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../../provider/AuthProvider';
 import { useForm } from 'react-hook-form';
 import { IoEyeOutline } from 'react-icons/io5';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const Login = () => {
@@ -109,6 +109,7 @@ const Login = () => {
                     <span className='text-2xl'><FaGithub /></span>
                     <span className=''>GitHub</span>
                 </button>
+                <p>New here?<span className='underline mx-2'><Link to={'/sign-up'}>Sign Up</Link></span></p>
             </div>
         </div>
     );

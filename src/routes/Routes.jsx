@@ -66,11 +66,15 @@ const router = createBrowserRouter([
             // admin routes
             {
                 path: 'admin/profile',
-                element: <AdminProfile></AdminProfile>
+                element: <AdminRoute><PrivateRoute>
+                    <AdminProfile></AdminProfile>
+                </PrivateRoute></AdminRoute>
             },
             {
                 path: 'admin/add-meal',
-                element: <AddMeal></AddMeal>
+                element: <AdminRoute><PrivateRoute>
+                    <AddMeal></AddMeal>
+                </PrivateRoute></AdminRoute>
             },
             {
                 path: 'admin/manage-users',

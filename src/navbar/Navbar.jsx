@@ -60,7 +60,7 @@ const Navbar = () => {
                     {
                         user ?
                             <button onClick={() => setOpen1(!open1)}>
-                                <img className='w-9 rounded-full' src={user?.photoURL} alt="" />
+                                <img className='w-9 h-9 rounded-full' src={user?.photoURL} alt="" />
                             </button> :
                             <>
                                 <NavLink to={'/sign-up'}>Join Us</NavLink>
