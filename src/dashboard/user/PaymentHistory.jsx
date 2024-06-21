@@ -15,7 +15,7 @@ const PaymentHistory = () => {
         },
         enabled: !!user?.email
     })
-    console.log(payments);
+    // console.log(payments);
     return (
         <div className='px-6'>
             <Heading title={'Payment History'}></Heading>

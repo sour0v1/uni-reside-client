@@ -24,7 +24,7 @@ const AdminProfile = () => {
         },
         enabled: !!user?.email
     })
-    console.log(mealLength);
+    // console.log(mealLength);
     return (
         <div>
             <Heading title={'Profile'}></Heading>

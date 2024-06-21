@@ -15,7 +15,7 @@ const UserProfile = () => {
         },
         enabled: !!user?.email
     })
-    console.log(userInfo);
+    // console.log(userInfo);
     return (
         <div>
             <Heading title={'Profile'}></Heading>

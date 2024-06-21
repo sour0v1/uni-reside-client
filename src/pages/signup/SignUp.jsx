@@ -10,6 +10,7 @@ import { updateProfile } from 'firebase/auth';
 import auth from '../../firebase/firebase.config';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
@@ -26,7 +27,7 @@ const SignUp = () => {
             name, email, userPhoto: image, badge: 'bronze', role: 'user'
         }
         const res = await axiosPublic.post('/create-user', userInfo);
-        console.log(res.data);
+        // console.log(res.data);
     }
 
     const onSubmit = async (data) => {
@@ -56,7 +57,7 @@ const SignUp = () => {
                         photoURL: photo
                     })
                         .then(() => {
-                            console.log(result.user);
+                            // console.log(result.user);
                             saveUser(result?.user?.displayName, result?.user?.email, result?.user?.photoURL
                             )
                             Swal.fire({
@@ -68,7 +69,7 @@ const SignUp = () => {
                             navigate('/')
                         })
                         .catch(error => {
-                            console.log(error);
+                            // console.log(error);
                         })
                 }
                 reset();
@@ -83,7 +84,7 @@ const SignUp = () => {
     const handleGoogleSingIn = () => {
         createUserByGoogle()
             .then(result => {
-                console.log(result.user);
+                // console.log(result.user);
                 saveUser(result?.user?.displayName, result?.user?.email, result?.user?.photoURL
                 )
                 Swal.fire({
@@ -95,14 +96,14 @@ const SignUp = () => {
                 navigate('/')
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
             })
     }
     // sign in with google
     const handleGithubSingIn = () => {
         createUserByGithub()
             .then(result => {
-                console.log(result.user);
+                // console.log(result.user);
                 saveUser(result?.user?.displayName, result?.user?.email, result?.user?.photoURL
                 )
                 Swal.fire({
@@ -114,7 +115,7 @@ const SignUp = () => {
                 navigate('/')
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
             })
     }
 
@@ -124,6 +125,9 @@ const SignUp = () => {
 
     return (
         <div className='w-3/4 md:w-1/3 lg:w-1/3 mx-auto shadow-lg my-16 p-9 font-roboto '>
+            <Helmet>
+                <title>UniReside | Sign Up</title>
+            </Helmet>
             <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
                 <div className='flex flex-col gap-2'>
                     <label htmlFor="name">Username</label>
@@ -139,7 +143,7 @@ const SignUp = () => {
                     <label htmlFor="password">Password</label>
                     <input className='px-3 py-2 bg-gray-100' {...register('password', { required: true, pattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/, minLength: 8 })} id='password' type={`${!closed ? 'password' : 'text'}`} placeholder='Password' />
                     <span onClick={() => setClosed(!closed)} className='absolute right-2 top-11'>{!closed ? <FaRegEyeSlash /> : <IoEyeOutline />}</span>
-                    {console.log('error in the pass -', errors)}
+                    {/* {console.log('error in the pass -', errors)} */}
                     {errors.password?.type === 'required' && <span className='text-red-500'>This field is required</span>}
                     {errors.password?.type === 'pattern' && <span className='text-red-500'>Password must have at least one uppercase and lowercase letter and one number</span>}
                     {errors.password?.type === 'minLength' && <span className='text-red-500'>Password length must be 8 character</span>}

@@ -18,11 +18,11 @@ const AllMeals = () => {
             return res.data;
         },
     })
-    console.log(allMeals);
+    // console.log(allMeals);
 
     const handleSort = async (event) => {
         const sortValue = event.target.value;
-        console.log(sortValue);
+        // console.log(sortValue);
         const sort = [...allMeals].sort((a, b) => {
             if (sortValue === 'likes') {
                 return b.likes - a.likes;
@@ -52,7 +52,7 @@ const AllMeals = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 const res = await axiosSecure.delete(`/delete-meal?id=${id}`)
-                console.log(res.data);
+                // console.log(res.data);
                 if (res.data.deletedCount) {
                     Swal.fire({
                         title: "Deleted!",

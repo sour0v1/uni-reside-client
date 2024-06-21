@@ -33,7 +33,7 @@ const ManageUser = () => {
             if (result.isConfirmed) {
                 axiosSecure.put(`/update-user?email=${email}`)
                     .then(result => {
-                        console.log(result.data)
+                        // console.log(result.data)
                         if (result.data.modifiedCount) {
                             Swal.fire({
                                 title: "Success!",
@@ -49,7 +49,7 @@ const ManageUser = () => {
     }
     const handleSearch = async (event) => {
         const searchValue = event.target.value;
-        console.log(searchValue);
+        // console.log(searchValue);
 
         if(searchValue){
             setCount(true);
@@ -59,7 +59,7 @@ const ManageUser = () => {
         }
 
         const res = await axiosSecure.get(`/user-search?searchValue=${searchValue}`)
-        console.log(res.data);
+        // console.log(res.data);
         setUsers(res.data);
     }
     if (isPending) {

@@ -20,12 +20,12 @@ const UpcomeMeals = () => {
             return res.data;
         },
     })
-    console.log(upMeals);
+    // console.log(upMeals);
     const sortedUpMeals = upMeals?.sort((a, b) => b.likes - a.likes);
-    console.log(sortedUpMeals);
+    // console.log(sortedUpMeals);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = async (data) => {
-        console.log(data);
+        // console.log(data);
 
         const imageFile = { image: data.image[0] }
 
@@ -53,7 +53,7 @@ const UpcomeMeals = () => {
         }
 
         const res = await axiosSecure.post('/upcoming-meal', meals);
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.insertedId) {
             Swal.fire({
                 title: "Success",
@@ -68,7 +68,7 @@ const UpcomeMeals = () => {
 
     const handlePublish = async (id) => {
         const res = await axiosSecure.post(`/up-to-add?id=${id}`)
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.insertedId) {
             Swal.fire({
                 title: "Success",
@@ -128,11 +128,11 @@ const UpcomeMeals = () => {
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <label htmlFor="">Post Time</label>
-                                    <input {...register('postTime')} className="py-1 px-3 bg-gray-200 outline-none" type="time" />
+                                    <input {...register('postTime')} className="py-1 px-3 bg-gray-200 outline-none" type="date" />
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <label htmlFor="">Likes</label>
-                                    <input required {...register('likes')} className="py-1 px-3 bg-gray-200 outline-none" type="number" />
+                                    <input {...register('likes')} className="py-1 px-3 bg-gray-200 outline-none" type="number" />
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <label htmlFor="">Reviews</label>

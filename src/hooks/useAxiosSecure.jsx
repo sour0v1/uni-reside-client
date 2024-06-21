@@ -10,13 +10,13 @@ const axiosSecure = axios.create({
 const useAxiosSecure = () => {
     const navigate = useNavigate();
     axiosSecure.interceptors.response.use((response) => {
-        console.log(response)
+        // console.log(response)
         return response;
     }, async (error) => {
         const status = error?.response.status;
-        console.log(status);
+        // console.log(status);
         if (status === 401 || status === 403) {
-            console.log('hello');
+            // console.log('hello');
             await signOut(auth);
             navigate('/login')
 

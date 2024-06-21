@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Link } from "react-router-dom";
 import { MdSort } from "react-icons/md";
+import { Helmet } from "react-helmet-async";
 
 
 const Meals = () => {
@@ -16,8 +17,8 @@ const Meals = () => {
     const [filter, setFilter] = useState(false);
     const [page, setPage] = useState(1)
     const [hasMore, setHasMore] = useState(true)
-    console.log('svalue - ', meals)
-    console.log('svalue1 - ', meals1)
+    // console.log('svalue - ', meals)
+    // console.log('svalue1 - ', meals1)
 
     const loadMeals = async () => {
         const res = await axiosPublic.get(`/all-category-meals?page=${page}&limit=${10}`)
@@ -33,9 +34,9 @@ const Meals = () => {
     const handleSearch = async (event) => {
         const searchQuery = event.target.value;
         setSearchValue(searchQuery);
-        console.log(searchQuery);
+        // console.log(searchQuery);
         const res = await axiosPublic.get(`/search-meals/${searchQuery}`)
-        console.log('err', res.data);
+        // console.log('err', res.data);
         // setMeals(res.data);
         setMeals(res.data);
 
@@ -43,15 +44,15 @@ const Meals = () => {
     // console.log(meals);
     const handleCategoryFilter = async (event) => {
         const filterValue = event.target.value;
-        console.log(filterValue);
+        // console.log(filterValue);
         if (!searchValue) {
             const res = await axiosPublic.get(`/filter-by-category/${filterValue}`)
-            console.log(res.data);
+            // console.log(res.data);
             setMeals(res.data);
         }
         if (searchValue) {
             const filterSearchValue = meals.filter(value => filterValue === value.category);
-            console.log('ddd', filterSearchValue)
+            // console.log('ddd', filterSearchValue)
             setMeals(filterSearchValue);
         }
 
@@ -60,7 +61,7 @@ const Meals = () => {
         const filterValue = event.target.value;
         // console.log(filterValue);
         const res = await axiosPublic.get(`/filter-by-price?priceValue=${filterValue}`)
-        console.log(res.data);
+        // console.log(res.data);
         setMeals(res.data);
     }
     const handleFilter = () => {
@@ -74,6 +75,9 @@ const Meals = () => {
             loader={<h4 className="text-center">Loading...</h4>}
         >
             <div className="max-w-5xl mx-auto font-roboto pt-24 mb-9 px-6 lg:px-0">
+                <Helmet>
+                    <title>UniReside | Meals</title>
+                </Helmet>
                 <h1 className="w-full text-center text-2xl font-bold">All Meals</h1>
                 <div className="w-2/3 mx-auto my-6 text-center relative">
                     <input onChange={handleSearch} placeholder="meal name" className="py-2 px-3 w-full bg-gray-200 rounded-full outline-none" type="text" />
@@ -114,7 +118,7 @@ const Meals = () => {
                                 (meals)?.map((meal, idx) => <MealCard key={idx} meal={meal}></MealCard>)
                             }
                         </div> :
-                        <div className="w-full text-center font-roboto">   
+                        <div className="w-full text-center font-roboto">
                             <h2 className="text-2xl font-bold">No meals Found</h2>
                         </div>
                 }

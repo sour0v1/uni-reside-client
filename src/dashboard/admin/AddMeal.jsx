@@ -10,11 +10,12 @@ const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 const AddMeal = () => {
     const axiosSecure = useAxiosSecure();
-    const {user} = useContext(AuthContext);
+    const { user, loading, setLoading } = useContext(AuthContext);
     // const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = async (data) => {
-        console.log(data);
+        setLoading(true);
+        // console.log(data);
 
         const imageFile = { image: data.image[0] }
 
@@ -42,18 +43,24 @@ const AddMeal = () => {
         }
 
         const res = await axiosSecure.post('/add-meals', meals);
-        console.log(res.data);
-        if(res.data.insertedId){
+        // console.log(res.data);
+        if (res.data.insertedId) {
             Swal.fire({
                 title: "Success",
                 text: "Meal added Successfully!",
                 icon: "success"
-              });
+            });
+            setLoading(false);
         }
 
     }
 
     // console.log(watch("example"));
+    if (loading) {
+        return <div className='flex justify-center items-center h-screen w-full'>
+            <span className="loading loading-bars loading-lg"></span>
+        </div>
+    }
     return (
         <div className="font-roboto lg:px-0">
             <Heading title={'Add Meal'}></Heading>
@@ -94,7 +101,7 @@ const AddMeal = () => {
                 </div>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="">Post Time</label>
-                    <input {...register('postTime')} className="py-1 px-3 bg-gray-200 outline-none" type="time" />
+                    <input {...register('postTime')} className="py-1 px-3 bg-gray-200 outline-none" type="date" />
                 </div>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="">Likes</label>

@@ -12,7 +12,7 @@ const Testimonials = () => {
             return res.data;
         }
     })
-    console.log(testimonials);
+    // console.log(testimonials);
     return (
         <div className='mb-12 max-w-5xl mx-auto font-roboto'>
             <h2 className='text-center text-2xl font-bold my-6'>What Students Say</h2>

@@ -7,6 +7,7 @@ import { AuthContext } from '../../provider/AuthProvider';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { ToastContainer, toast } from 'react-toastify';
+import { Helmet } from 'react-helmet-async';
 
 const UpcomingMeals = () => {
     const axiosPublic = useAxiosPublic();
@@ -25,7 +26,7 @@ const UpcomingMeals = () => {
         enabled: !!pageNo,
         refetchInterval: 500
     })
-    console.log('hhhh -', upcomingMeals)
+    // console.log('hhhh -', upcomingMeals)
 
     const handlePageChange = (newPagNo) => {
         setPageNo(newPagNo);
@@ -39,10 +40,10 @@ const UpcomingMeals = () => {
         },
         enabled: !!user?.email
     })
-    console.log(userBadge);
+    // console.log(userBadge);
 
     const handleLike = async (id, likes) => {
-        console.log(id);
+        // console.log(id);
         if (userBadge === 'silver' || userBadge === 'gold' || userBadge === 'platinum') {
             const res = await axiosSecure.post(`/up-like?id=${id}&userEmail=${user?.email}`);
             toast(res.data.message);
@@ -59,6 +60,9 @@ const UpcomingMeals = () => {
     }
     return (
         <div className='pt-24 max-w-5xl mx-auto font-roboto mb-9'>
+            <Helmet>
+                <title>UniReside | Upcoming Meals</title>
+            </Helmet>
             <h1 className='w-full text-center text-2xl font-bold mb-9 mt-3'>Upcoming Meals</h1>
             {
                 upcomingMeals?.result.length > 0 ?

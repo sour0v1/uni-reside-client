@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { IoEyeOutline } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
     const { signInUserByEmail, createUserByGithub, setLoading, loading, createUserByGoogle } = useContext(AuthContext);
@@ -23,7 +24,7 @@ const Login = () => {
         signInUserByEmail(email, password)
             .then(result => {
                 // console.log(result.user);
-                console.log('sign in successfully');
+                // console.log('sign in successfully');
                 Swal.fire({
                     title: "Success",
                     text: "Logged in Successfully!",
@@ -35,7 +36,7 @@ const Login = () => {
                 navigate('/');
             })
             .catch(error => {
-                console.log(error.message);
+                // console.log(error.message);
                 // setSignInError(error.message);
                 setLoading(false)
                 if (error.message.includes('auth/invalid-credential')) {
@@ -49,7 +50,7 @@ const Login = () => {
     const handleGoogleSingIn = () => {
         createUserByGoogle()
             .then(result => {
-                console.log(result.user);
+                // console.log(result.user);
                 Swal.fire({
                     title: "Success",
                     text: "Logged in Successfully!",
@@ -59,14 +60,14 @@ const Login = () => {
                 navigate('/')
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
 
             })
     }
     const handleGithubSingIn = () => {
         createUserByGithub()
             .then(result => {
-                console.log(result.user);
+                // console.log(result.user);
                 Swal.fire({
                     title: "Success",
                     text: "Logged in Successfully!",
@@ -76,7 +77,7 @@ const Login = () => {
                 navigate('/')
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
             })
     }
     if (loading) {
@@ -84,6 +85,9 @@ const Login = () => {
     }
     return (
         <div className='w-3/4 md:w-2/3 lg:w-1/3 mx-auto shadow-lg my-16 p-9 font-roboto '>
+            <Helmet>
+                <title>UniReside | Log In</title>
+            </Helmet>
             <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
                 <div className='flex flex-col gap-2'>
                     <span className='text-red-500'>{signInError && signInError}</span>

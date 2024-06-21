@@ -18,7 +18,7 @@ const Navbar = () => {
     const [open1, setOpen1] = useState(false);
     const scrollDirection = useScroll();
     const navigate = useNavigate();
-    console.log(open1)
+    // console.log(open1)
     const { user } = useContext(AuthContext);
     // const user = false;
     // fixed z-10 w-full
@@ -31,19 +31,19 @@ const Navbar = () => {
         },
         enabled: !!user?.email
     })
-    console.log(userRole)
+    // console.log(userRole)
     const isAdmin = userRole?.role;
     const handleLogOut = () => {
         signOut(auth)
             .then(() => {
-                console.log('sign out successfully');
+                // console.log('sign out successfully');
                 navigate('/');
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
             })
     }
-    console.log('boom', window.scrollY)
+    // console.log('boom', window.scrollY)
     return (
         <>
             <div className={`font-roboto flex justify-between items-center lg:px-16 py-5 bg-[#373A40] bg-opacity-35 fixed z-10 w-full text-white ${!open ? 'px-6' : 'pr-6'} ${scrollDirection === 'down' ? '-translate-y-full transition-transform duration-300' : '-translate-y-0 transition-transform duration-300'}`}>

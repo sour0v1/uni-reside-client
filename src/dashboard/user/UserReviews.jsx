@@ -25,14 +25,14 @@ const UserReviews = () => {
         navigate(`/meal/${id}`)
     }
     // console.log(reviews);
-    console.log('review value -', reviewValue)
+    // console.log('review value -', reviewValue)
     const handleReviewValue = (event) => {
         const value = event.target.value;
         setReviewValue(value);
     }
     const handleEdit = async (id) => {
         const res = await axiosSecure.put(`/edit-reviews?id=${id}&value=${reviewValue}`)
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.modifiedCount) {
             Swal.fire({
                 title: "Updated!",
@@ -54,7 +54,7 @@ const UserReviews = () => {
         }).then( async (result) => {
             if (result.isConfirmed) {
                 const res = await axiosSecure.delete(`/delete-review?id=${id}`)
-                console.log(res.data);
+                // console.log(res.data);
                 if (res.data.deletedCount) {
                     Swal.fire({
                         title: "Success!",

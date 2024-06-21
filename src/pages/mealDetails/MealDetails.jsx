@@ -7,13 +7,14 @@ import { AuthContext } from '../../provider/AuthProvider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 const MealDetails = () => {
     const { user } = useContext(AuthContext);
     const [count, setCount] = useState(true)
     const { id } = useParams();
     const axiosSecure = useAxiosSecure();
-    console.log(id);
+    // console.log(id);
     // all meals
     const { data: meal, isPending, refetch } = useQuery({
         queryKey: ['meal'],
@@ -32,7 +33,7 @@ const MealDetails = () => {
         },
         enabled: !!id
     })
-    console.log(review);
+    // console.log(review);
     const { data: userBadge } = useQuery({
         queryKey: ['badge'],
         queryFn: async () => {
@@ -43,7 +44,7 @@ const MealDetails = () => {
     })
     // handle like
     const handleLike = async (id) => {
-        console.log(id);
+        // console.log(id);
         if (user) {
             const res = await axiosSecure.post(`/like?mealId=${id}&userEmail=${user?.email}`);
             toast(res.data.message);
@@ -60,7 +61,7 @@ const MealDetails = () => {
     }
     // handle request
     const handleRequest = async (id, title, likes, reviews) => {
-        console.log(id);
+        // console.log(id);
         const info = {
             title, likes, reviews, userName: user?.displayName, userEmail: user?.email, status: 'pending'
         }
@@ -90,7 +91,7 @@ const MealDetails = () => {
     // post review
     const post = document.getElementById('review');
     const handleReview = async () => {
-        console.log(post.value);
+        // console.log(post.value);
         const reviewInfo = {
             mealId: meal?._id,
             title: meal?.title,
@@ -101,7 +102,7 @@ const MealDetails = () => {
         }
         if (user) {
             const res = await axiosSecure.post('/review', reviewInfo);
-            console.log(res.data);
+            // console.log(res.data);
             if (res.data.insertedId) {
                 reload();
                 toast('Posted Successfully!');
@@ -131,6 +132,9 @@ const MealDetails = () => {
 
             </div>
             <div className='max-w-5xl mx-auto font-roboto space-y-3 shadow-lg mb-9 p-6'>
+            <Helmet>
+                <title>UniReside | Meal Details</title>
+            </Helmet>
 
                 <img className='lg:h-[500px] w-full' src={meal?.image} alt="meal-food" />
                 <div className='flex justify-between items-center'>

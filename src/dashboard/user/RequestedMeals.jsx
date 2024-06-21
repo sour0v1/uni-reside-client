@@ -16,7 +16,7 @@ const RequestedMeals = () => {
         },
         enabled: !!user?.email
     })
-    console.log(meals);
+    // console.log(meals);
     const handleDelete = async (id) => {
         Swal.fire({
             title: "Are you sure?",
@@ -29,7 +29,7 @@ const RequestedMeals = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 const res = await axiosSecure.delete(`/delete-request?id=${id}`)
-                console.log(res.data);
+                // console.log(res.data);
                 if (res.data.deletedCount) {
                     Swal.fire({
                         title: "Success!",

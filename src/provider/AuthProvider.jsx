@@ -38,14 +38,14 @@ const AuthProvider = ({children}) => {
             if(currentUser){
                 axiosPublic.post('/jwt', {email}, {withCredentials : true})
                     .then(res => {
-                        console.log(res.data);
+                        // console.log(res.data);
                     })
             }
             else{
-                console.log('hello')
+                // console.log('hello')
                 axiosPublic.post('/remove-token', {}, {withCredentials : true})
                     .then(res => {
-                        console.log(res.data);
+                        // console.log(res.data);
                     })
             }
             setLoading(false);

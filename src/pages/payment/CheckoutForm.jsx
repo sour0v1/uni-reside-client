@@ -54,12 +54,12 @@ const CheckoutForm = () => {
             card
         })
         if (error) {
-            console.log('error -', error);
+            // console.log('error -', error);
             setError(error.message);
 
         }
         else {
-            console.log('paymentMethod -', paymentMethod);
+            // console.log('paymentMethod -', paymentMethod);
             setError(null);
         }
         // confirm card payment
@@ -73,7 +73,7 @@ const CheckoutForm = () => {
             }
         })
             .then(async (result) => {
-                console.log('confirm payment -', result);
+                // console.log('confirm payment -', result);
                 if (result.paymentIntent.status === 'succeeded') {
                     const paymentInfo = {
                         email: user?.email,
@@ -85,7 +85,7 @@ const CheckoutForm = () => {
                     const res = await axiosSecure.post('/payment-history', paymentInfo)
                     // console.log(res.data);
                     const userRes = await axiosSecure.patch(`/update-user?email=${user?.email}&updatedBadge=${data?.package}`)
-                    console.log(userRes.data);
+                    // console.log(userRes.data);
                     Swal.fire({
                         title: "Success!",
                         text: "Successful Payment",
@@ -94,7 +94,7 @@ const CheckoutForm = () => {
                 }
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
             })
     }
     return (

@@ -17,10 +17,10 @@ const ServeMeals = () => {
             return res.data;
         },
     })
-    console.log(requestedMeals);
+    // console.log(requestedMeals);
     const handleStatus = async (id, email) => {
         const res = await axiosSecure.put(`/update-status?id=${id}&email=${email}`)
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.modifiedCount) {
             Swal.fire({
                 title: "Success",
@@ -33,7 +33,7 @@ const ServeMeals = () => {
     }
     const handleSearch = async (event) => {
         const searchValue = event.target.value;
-        console.log(searchValue);
+        // console.log(searchValue);
 
         if (searchValue) {
             setCount(true);
@@ -43,7 +43,7 @@ const ServeMeals = () => {
         }
 
         const res = await axiosSecure.get(`/requested-meal-search?searchValue=${searchValue}`)
-        console.log(res.data);
+        // console.log(res.data);
         setSearchMeals(res.data);
     }
     return (

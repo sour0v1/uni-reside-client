@@ -13,22 +13,26 @@ import { BiFoodMenu } from 'react-icons/bi';
 import { CiUser } from 'react-icons/ci';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import { Helmet } from 'react-helmet-async';
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
-    const {data : userRole} = useQuery({
-        queryKey : ['userRole'],
-        queryFn : async () => {
+    const { data: userRole } = useQuery({
+        queryKey: ['userRole'],
+        queryFn: async () => {
             const res = await axiosSecure.get(`/user?userEmail=${user?.email}`);
             return res.data;
         },
-        enabled : !!user?.email
+        enabled: !!user?.email
     })
-    console.log(userRole)
+    // console.log(userRole)
     const isAdmin = userRole?.role;
     return (
         <div className='grid grid-cols-1 lg:grid-cols-12 gap-6 lg:max-w-6xl lg:mx-auto font-roboto my-9 bg-gray-100 p-9'>
+            <Helmet>
+                <title>UniReside | Dashboard</title>
+            </Helmet>
             {/* routes */}
             {
                 isAdmin === 'admin' ?

@@ -16,7 +16,7 @@ const Reviews = () => {
             return res.data;
         },
     })
-    console.log(reviews);
+    // console.log(reviews);
     const handleNavigate = (id) => {
         navigate(`/meal/${id}`)
     }
