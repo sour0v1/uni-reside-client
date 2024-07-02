@@ -16,3 +16,6 @@
 - Access detailed allergen information and dietary guidelines for each meal
 -  Allow users to submit meal requests 
 - Share your meal experiences and provide likes and reviews.
+
+### Technology used in this project : ###
+HTML, CSS, Tailwind CSS, React, firebase, Axios, Tanstack query, node, express, jwt, MongoDB
